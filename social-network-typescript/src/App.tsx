@@ -7,8 +7,7 @@ function App() {
     
     <div>
     
-    <h1>Social Network!</h1>
-    <p>Lets get started!</p>
+    <p>Update</p>
 
     </div>
     
