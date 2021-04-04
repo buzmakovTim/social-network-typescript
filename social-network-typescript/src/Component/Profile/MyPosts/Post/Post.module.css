@@ -1,0 +1,22 @@
+.post {
+  color: rgb(255, 255, 255);
+  margin-bottom: 30px;
+  background-color: teal;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.post img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 18px;
+}
+
+.avaAndUserName {
+  display: flex;
+  flex-direction: row;
+}
+
+p {
+  color: white;
+}
