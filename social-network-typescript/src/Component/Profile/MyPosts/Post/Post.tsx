@@ -1,20 +1,18 @@
 import React from 'react';
+import { UserType } from '../../../../App';
 import c from './Post.module.css';
 
 
-type UserType = {
-    firstName: string
-    lastName: string
-}
 
-type PostType = {
+
+export type PostPropsType = {
     user: UserType
     postText: string
     likes: number
 }
 
 
-const Post = (props: PostType) => {
+const Post = (props: PostPropsType) => {
     return (
         <div className={c.post}>
             

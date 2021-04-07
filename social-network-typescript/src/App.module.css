@@ -17,7 +17,7 @@ p {
   color: blue;
 }
 
-.app-wrapper {
+.appWrapper {
   height: 100vh;
   display: grid;
   grid-auto-rows: 100px auto 40px;
@@ -28,4 +28,10 @@ p {
     'f f';
   align-content: stretch;
   background-color: rgb(161, 125, 125);
+}
+
+.appWrapperContent {
+  padding: 20px;
+  grid-area: c;
+  background-color: rgb(109, 109, 131);
 }

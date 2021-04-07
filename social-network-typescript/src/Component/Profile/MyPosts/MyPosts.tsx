@@ -1,40 +1,29 @@
 import React from 'react';
-import classes from './MyPosts.module.css';
+import c from './MyPosts.module.css';
 import Post from './Post/Post';
+import { PostPropsType } from './Post/Post';
 
+type MyPostsPropsType = {
+  posts: Array<PostPropsType>;
+};
 
-const user = {
-    firstName: "Tim",
-    lastName: "Buzmakov"
-}
+const MyPosts = (props: MyPostsPropsType) => {
+  return (
+    <div>
+      <textarea className={c.inputArea}></textarea>
+      <div>
+        <button className={c.addPostButton}>Add post</button>
+      </div>
 
-const user1 = {
-    firstName: "Kevin",
-    lastName: "Miller"
-}
+      <h3>My Posts</h3>
 
-const MyPosts = () => {
-    return (
-
-        <div>
-
-            <textarea></textarea>
-            <div>
-                <button>Add post</button>
-            </div>
-            
-            <h3>My Posts</h3>
-        <div>
-            <Post postText="This is first Post" likes={19} user={user}/>
-            <Post postText="This is second Post" likes={10} user={user1}/>
-            <Post postText="This is third Post" likes={9} user={user}/>
-            <Post postText="This is fourth Post" likes={4} user={user}/>
-        </div>
-        
-
-        </div>
-
-    )
-}
+      <div>
+        {props.posts.map((p) => (
+          <Post user={p.user} postText={p.postText} likes={p.likes} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default MyPosts;
