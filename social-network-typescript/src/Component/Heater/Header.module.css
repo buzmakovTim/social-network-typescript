@@ -1,4 +1,53 @@
 .header {
   grid-area: h;
-  background-color: rgb(91, 150, 91);
+  height: 60px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 70%;
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* text-align: center; */
+  height: 60px;
+  /* width: 250px; */
+  background-color: rgb(255, 255, 255);
+}
+
+.logo img {
+  margin-left: 10px;
+  height: 35px;
+  width: 35px;
+  border-radius: 10px;
+}
+
+.logoText {
+  font-size: 1.1em;
+  font-family: 'Comfortaa', cursive;
+  /* margin-top: 7px; */
+  margin-left: 10px;
+}
+
+input {
+  margin-left: 20px;
+  padding-left: 10px;
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(241, 241, 241);
+  background-color: rgb(233, 233, 233);
+}
+
+input:focus {
+  outline: none;
 }

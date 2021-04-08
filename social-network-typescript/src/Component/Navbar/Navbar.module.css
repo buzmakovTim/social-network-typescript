@@ -1,6 +1,6 @@
 .nav {
   grid-area: n;
-  background-color: rgb(117, 76, 76);
+  /* background-color: rgb(117, 76, 76); */
   padding: 20px;
   min-width: 200px;
 }
@@ -10,7 +10,7 @@
 }
 
 .item a {
-  color: white;
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 

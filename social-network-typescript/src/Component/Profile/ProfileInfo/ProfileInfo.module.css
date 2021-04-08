@@ -1,0 +1,16 @@
+.profileInfo img {
+  height: 200px;
+}
+
+.profileWallpaper {
+}
+
+.profileAvatar img {
+  max-width: 90px;
+  max-height: 90px;
+  border-radius: 30px;
+}
+
+h2 {
+  color: rgb(4, 37, 80);
+}

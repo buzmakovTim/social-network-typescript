@@ -1,7 +1,7 @@
 .post {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   margin-bottom: 30px;
-  background-color: teal;
+  background-color: rgb(233, 233, 233);
   padding: 20px;
   border-radius: 20px;
 }
@@ -10,11 +10,17 @@
   max-width: 50px;
   max-height: 50px;
   border-radius: 18px;
+  margin: 0 10px 10px 0;
 }
 
 .avaAndUserName {
   display: flex;
   flex-direction: row;
+}
+
+.userName {
+  font-size: 1.5em;
+  color: rgb(48, 98, 190);
 }
 
 p {
