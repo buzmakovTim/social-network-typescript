@@ -2,10 +2,13 @@ import React from 'react';
 import classes from './Footer.module.css'
 
 const Footer = () => {
-    return (
+  
+  const r = '&#169';
+  
+  return (
         <div className={classes.footer}>
         <div>
-          Footer
+          <span> Social Network 2021 ©</span>
         </div>
     </div> 
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import c from './App.module.css';
-import Header from './Component/Heater/Header';
+import Header from './Component/Header/Header';
 import Navbar from './Component/Navbar/Navbar';
 import Profile from './Component/Profile/Profile';
 import Footer from './Component/Footer/Footer';
@@ -88,8 +88,9 @@ function App() {
             <Route path="/settings" component={Settings} />
           </div>
 
-          <Footer />
+          
         </div>
+        <Footer />
       </div>
     </BrowserRouter>
   );

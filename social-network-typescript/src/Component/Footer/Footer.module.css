@@ -1,7 +1,13 @@
 .footer {
   grid-area: f;
-  height: 100%;
+  /* height: 25px; */
+  min-width: 100%;
   text-align: center;
-  /* align-self: center; */
-  background-color: rgb(151, 231, 119);
+  padding: 3px 0;
+  background-color: rgb(255, 255, 255);
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
