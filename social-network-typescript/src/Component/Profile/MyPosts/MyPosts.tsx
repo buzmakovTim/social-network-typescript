@@ -8,6 +8,12 @@ type MyPostsPropsType = {
 };
 
 const MyPosts = (props: MyPostsPropsType) => {
+  //
+  //Creating array for Posts using MAP
+  let posts = props.posts.map((post) => (
+    <Post user={post.user} postText={post.postText} likes={post.likes} />
+  ));
+
   return (
     <div>
       <textarea className={c.inputArea}></textarea>
@@ -17,11 +23,7 @@ const MyPosts = (props: MyPostsPropsType) => {
 
       <h3>My Posts</h3>
 
-      <div>
-        {props.posts.map((p) => (
-          <Post user={p.user} postText={p.postText} likes={p.likes} />
-        ))}
-      </div>
+      <div>{posts}</div>
     </div>
   );
 };

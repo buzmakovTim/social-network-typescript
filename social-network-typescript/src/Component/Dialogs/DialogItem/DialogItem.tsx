@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserType } from '../../../App';
+import { UserType } from '../../../index';
 import c from './DialogItem.module.css';
 
 //Props Type for Dialog Item

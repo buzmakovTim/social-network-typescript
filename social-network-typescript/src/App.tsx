@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import c from './App.module.css';
 import Header from './Component/Header/Header';
 import Navbar from './Component/Navbar/Navbar';
@@ -10,61 +9,45 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import News from './Component/News/News';
 import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
+import { UserType } from '.';
 
-export type UserType = {
-  id: number;
-  avatarUrl: string;
-  firstName: string;
-  lastName: string;
+export type MessageType = {
+  userId: number;
+  messageText: string;
 };
 
-const user: UserType = {
-  id: 1,
-  avatarUrl:
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-  firstName: 'Tim',
-  lastName: 'Buzmakov',
+export type DialogsType = {
+  users: UserType[];
+  messages: MessageType[];
 };
 
-const user1: UserType = {
-  id: 2,
-  avatarUrl: 'missing',
-  firstName: 'Kevin',
-  lastName: 'William',
+export type PostsType = {
+  user: UserType;
+  postText: string;
+  likes: number;
 };
 
-const user2: UserType = {
-  id: 3,
-  avatarUrl: 'missing',
-  firstName: 'Paul',
-  lastName: 'Miller',
+export type UserProfileType = {
+  userLoggedIn: UserType;
+  posts: PostsType[];
 };
 
-const posts = [
-  { user: user, postText: 'First post', likes: 10 },
-  { user: user1, postText: 'Second Post', likes: 5 },
-  { user: user2, postText: 'Third post', likes: 2 },
-];
-
-const message = {
-  userId: 1,
-  messageText: 'First message for user with ID - 1',
+export type AppPropsType = {
+  dialogs: DialogsType;
+  userProfile: UserProfileType;
 };
 
-const message1 = {
-  userId: 2,
-  messageText: 'First message for user with ID - 2',
-};
+function App(props: AppPropsType) {
+  let dialogs = () => (
+    <Dialogs users={props.dialogs.users} messages={props.dialogs.messages} />
+  );
+  let userProfile = () => (
+    <Profile
+      userLoggedIn={props.userProfile.userLoggedIn}
+      posts={props.userProfile.posts}
+    />
+  );
 
-const message2 = {
-  userId: 3,
-  messageText: 'First message for user with ID - 3',
-};
-
-const users = [user, user1, user2];
-const messages = [message, message1, message2];
-
-function App() {
   return (
     <BrowserRouter>
       <div>
@@ -73,22 +56,15 @@ function App() {
           <Navbar />
 
           <div className={c.appWrapperContent}>
-            <Route
-              path="/dialogs"
-              component={() => <Dialogs users={users} messages={messages} />}
-            />
-
-            <Route
-              path="/profile"
-              component={() => <Profile userLoggedIn={user} posts={posts} />}
-            />
+            {/* Dialogs */}
+            <Route path="/dialogs" render={dialogs} />
+            {/* Profile */}
+            <Route path="/profile" render={userProfile} />
 
             <Route path="/news" component={News} />
             <Route path="/music" component={Music} />
             <Route path="/settings" component={Settings} />
           </div>
-
-          
         </div>
         <Footer />
       </div>

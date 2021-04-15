@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserType } from '../../../../App';
+import { UserType } from '../../../../index';
 import c from './Post.module.css';
 
 export type PostPropsType = {

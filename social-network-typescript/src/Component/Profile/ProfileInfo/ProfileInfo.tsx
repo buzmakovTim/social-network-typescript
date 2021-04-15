@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserType } from '../../../App';
+import { UserType } from '../../../index';
 import c from './ProfileInfo.module.css';
 
 type ProfileInfoPropsType = {
