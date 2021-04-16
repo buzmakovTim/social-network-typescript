@@ -4,13 +4,13 @@ import c from './Message.module.css';
 
 //Props Type for Messages
 export type MessagePropsType = {
-  userId: number;
+  id: string;
   messageText: string;
 };
 
 // Creating Message Component
 const Message = (props: MessagePropsType) => {
-  let path = '/dialogs/' + props.userId;
+  let path = '/dialogs/' + props.id;
   return (
     <div className={c.message}>
       <NavLink to={path}>{props.messageText}</NavLink>

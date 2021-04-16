@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserType } from '../../../../index';
+import { UserType } from '../../../../redux/state';
 import c from './Post.module.css';
 
 export type PostPropsType = {

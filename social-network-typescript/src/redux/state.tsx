@@ -1,0 +1,115 @@
+import { v1 } from 'uuid';
+
+export type UserType = {
+  id: string;
+  avatarUrl: string;
+  firstName: string;
+  lastName: string;
+};
+export type DialogsPageType = {
+  users: UserType[];
+  messages: MessageType[];
+};
+
+export type MessageType = {
+  id: string;
+  messageText: string;
+};
+
+export type PostsType = {
+  user: UserType;
+  postText: string;
+  likes: number;
+};
+export type UserProfilePageType = {
+  userLoggedIn: UserType;
+  posts: PostsType[];
+};
+
+export type StateType = {
+  profilePage: UserProfilePageType;
+  dialogsPage: DialogsPageType;
+};
+
+// State
+let state: StateType = {
+  //Dialogs Page
+  dialogsPage: {
+    users: [
+      {
+        id: v1(),
+        avatarUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+        firstName: 'Kevin',
+        lastName: 'William',
+      },
+      {
+        id: v1(),
+        avatarUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+        firstName: 'Kevin',
+        lastName: 'William',
+      },
+      {
+        id: v1(),
+        avatarUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+        firstName: 'Kevin',
+        lastName: 'William',
+      },
+    ],
+    messages: [
+      { id: v1(), messageText: 'First message for user with ID - 1' },
+      { id: v1(), messageText: 'First message for user with ID - 1' },
+      { id: v1(), messageText: 'First message for user with ID - 1' },
+    ],
+  },
+
+  //User Profile Page
+  profilePage: {
+    userLoggedIn: {
+      id: v1(),
+      avatarUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+      firstName: 'Tim',
+      lastName: 'Buzmakov',
+    },
+    posts: [
+      {
+        user: {
+          id: v1(),
+          avatarUrl:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+          firstName: 'Tim',
+          lastName: 'Buzmakov',
+        },
+        postText: 'First post',
+        likes: 10,
+      },
+      {
+        user: {
+          id: v1(),
+          avatarUrl:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+          firstName: 'Kevin',
+          lastName: 'William',
+        },
+        postText: 'First post',
+        likes: 3,
+      },
+      {
+        user: {
+          id: v1(),
+          avatarUrl:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+          firstName: 'Paul',
+          lastName: 'Miller',
+        },
+        postText: 'First post',
+        likes: 6,
+      },
+    ],
+  },
+};
+
+export default state;

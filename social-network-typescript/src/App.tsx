@@ -9,42 +9,20 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import News from './Component/News/News';
 import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
-import { UserType } from '.';
-
-export type MessageType = {
-  userId: number;
-  messageText: string;
-};
-
-export type DialogsType = {
-  users: UserType[];
-  messages: MessageType[];
-};
-
-export type PostsType = {
-  user: UserType;
-  postText: string;
-  likes: number;
-};
-
-export type UserProfileType = {
-  userLoggedIn: UserType;
-  posts: PostsType[];
-};
+import { StateType } from './redux/state';
 
 export type AppPropsType = {
-  dialogs: DialogsType;
-  userProfile: UserProfileType;
+  state: StateType;
 };
 
 function App(props: AppPropsType) {
-  let dialogs = () => (
-    <Dialogs users={props.dialogs.users} messages={props.dialogs.messages} />
-  );
+  // Dialogs
+  let dialogs = () => <Dialogs data={props.state.dialogsPage} />;
+  // UserProfile
   let userProfile = () => (
     <Profile
-      userLoggedIn={props.userProfile.userLoggedIn}
-      posts={props.userProfile.posts}
+      userLoggedIn={props.state.profilePage.userLoggedIn}
+      posts={props.state.profilePage.posts}
     />
   );
 
