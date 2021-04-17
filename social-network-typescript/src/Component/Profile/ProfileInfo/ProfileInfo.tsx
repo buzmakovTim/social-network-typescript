@@ -3,6 +3,7 @@ import { UserType } from '../../../redux/state';
 import c from './ProfileInfo.module.css';
 
 type ProfileInfoPropsType = {
+  urlBackgroundImg: string;
   userLoggedIn: UserType;
 };
 
@@ -10,10 +11,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
   return (
     <div className={c.profileInfo}>
       <div className={c.profileWallpaper}>
-        <img
-          src="https://i0.wp.com/www.euroscientist.com/wp-content/uploads/2019/06/cropped-social-media-3846597_1280-1.png?resize=672%2C372&ssl=1"
-          alt=""
-        />
+        <img src={props.urlBackgroundImg} alt="" />
       </div>
 
       <div className={c.profileAvatar}>

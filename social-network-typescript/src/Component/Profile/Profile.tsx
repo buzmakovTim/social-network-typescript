@@ -6,6 +6,7 @@ import c from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 type ProfilePropsType = {
+  urlBackgroundImg: string;
   userLoggedIn: UserType;
   posts: Array<PostPropsType>;
 };
@@ -13,7 +14,10 @@ type ProfilePropsType = {
 const Profile = (props: ProfilePropsType) => {
   return (
     <div>
-      <ProfileInfo userLoggedIn={props.userLoggedIn} />
+      <ProfileInfo
+        userLoggedIn={props.userLoggedIn}
+        urlBackgroundImg={props.urlBackgroundImg}
+      />
 
       <MyPosts posts={props.posts} />
     </div>

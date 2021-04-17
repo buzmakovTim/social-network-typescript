@@ -22,6 +22,7 @@ export type PostsType = {
   likes: number;
 };
 export type UserProfilePageType = {
+  urlBackgroundImg: string;
   userLoggedIn: UserType;
   posts: PostsType[];
 };
@@ -67,6 +68,8 @@ let state: StateType = {
 
   //User Profile Page
   profilePage: {
+    urlBackgroundImg:
+      'https://i0.wp.com/www.euroscientist.com/wp-content/uploads/2019/06/cropped-social-media-3846597_1280-1.png?resize=672%2C372&ssl=1',
     userLoggedIn: {
       id: v1(),
       avatarUrl:

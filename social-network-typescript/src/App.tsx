@@ -21,32 +21,31 @@ function App(props: AppPropsType) {
   // UserProfile
   let userProfile = () => (
     <Profile
+      urlBackgroundImg={props.state.profilePage.urlBackgroundImg}
       userLoggedIn={props.state.profilePage.userLoggedIn}
       posts={props.state.profilePage.posts}
     />
   );
 
   return (
-    <BrowserRouter>
-      <div>
-        <Header />
-        <div className={c.appWrapper}>
-          <Navbar />
+    <div>
+      <Header />
+      <div className={c.appWrapper}>
+        <Navbar />
 
-          <div className={c.appWrapperContent}>
-            {/* Dialogs */}
-            <Route path="/dialogs" render={dialogs} />
-            {/* Profile */}
-            <Route path="/profile" render={userProfile} />
+        <div className={c.appWrapperContent}>
+          {/* Dialogs */}
+          <Route path="/dialogs" render={dialogs} />
+          {/* Profile */}
+          <Route path="/profile" render={userProfile} />
 
-            <Route path="/news" component={News} />
-            <Route path="/music" component={Music} />
-            <Route path="/settings" component={Settings} />
-          </div>
+          <Route path="/news" component={News} />
+          <Route path="/music" component={Music} />
+          <Route path="/settings" component={Settings} />
         </div>
-        <Footer />
       </div>
-    </BrowserRouter>
+      <Footer />
+    </div>
   );
 }
 
