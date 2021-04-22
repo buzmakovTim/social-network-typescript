@@ -41,22 +41,22 @@ let state: StateType = {
         id: v1(),
         avatarUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-        firstName: 'Kevin',
-        lastName: 'William',
+        firstName: 'Ken',
+        lastName: 'Olegov',
       },
       {
         id: v1(),
         avatarUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-        firstName: 'Kevin',
-        lastName: 'William',
+        firstName: 'Oleg',
+        lastName: 'Tulin',
       },
       {
         id: v1(),
         avatarUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-        firstName: 'Kevin',
-        lastName: 'William',
+        firstName: 'Kirill',
+        lastName: 'Goncharov',
       },
     ],
     messages: [
@@ -83,8 +83,8 @@ let state: StateType = {
           id: v1(),
           avatarUrl:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-          firstName: 'Tim',
-          lastName: 'Buzmakov',
+          firstName: 'Vadik',
+          lastName: 'Huyadik',
         },
         postText: 'First post',
         likes: 10,
@@ -94,8 +94,8 @@ let state: StateType = {
           id: v1(),
           avatarUrl:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-          firstName: 'Kevin',
-          lastName: 'William',
+          firstName: 'Kiril',
+          lastName: 'Goncharov',
         },
         postText: 'First post',
         likes: 3,
@@ -105,8 +105,8 @@ let state: StateType = {
           id: v1(),
           avatarUrl:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-          firstName: 'Paul',
-          lastName: 'Miller',
+          firstName: 'Dima',
+          lastName: 'Drochilov',
         },
         postText: 'First post',
         likes: 6,
