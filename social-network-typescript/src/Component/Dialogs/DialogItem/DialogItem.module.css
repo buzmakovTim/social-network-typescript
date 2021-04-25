@@ -1,7 +1,60 @@
 .dialog {
   padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+.dialog a {
+  text-decoration: none;
+}
+.dialog:hover {
+  padding: 10px;
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
-.dialog .active {
-  color: crimson;
+a.activeLink > .dialog {
+  padding: 10px;
+  text-decoration: none;
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+/* .dialog a.activeLink {
+  padding: 10px;
+  background-color: rgb(13, 178, 184);
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+} */
+
+.dialog a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  display: flex;
+}
+a.activeLink {
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+}
+.dialog a.activeLink {
+  text-decoration: none;
+  /* color: rgb(88, 0, 18); */
+  /* font-weight: bold; */
+}
+
+.image {
+  width: 40px;
+  height: 40px;
+  border-radius: 18px;
+}
+
+.avatar {
+  margin-bottom: 10px;
 }

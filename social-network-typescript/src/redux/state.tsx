@@ -1,14 +1,15 @@
 import { v1 } from 'uuid';
+import { rerenderEntireTree } from '../render';
 
 export type UserType = {
   id: string;
   avatarUrl: string;
   firstName: string;
   lastName: string;
+  messages?: MessageType[];
 };
 export type DialogsPageType = {
   users: UserType[];
-  messages: MessageType[];
 };
 
 export type MessageType = {
@@ -30,10 +31,11 @@ export type UserProfilePageType = {
 export type StateType = {
   profilePage: UserProfilePageType;
   dialogsPage: DialogsPageType;
+  friendsPageSideBar: UserType[];
 };
 
 // State
-let state: StateType = {
+export let state: StateType = {
   //Dialogs Page
   dialogsPage: {
     users: [
@@ -43,6 +45,11 @@ let state: StateType = {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
         firstName: 'Ken',
         lastName: 'Olegov',
+        messages: [
+          { id: v1(), messageText: 'First message for user Ken' },
+          { id: v1(), messageText: 'Second message for user Ken' },
+          { id: v1(), messageText: 'Third message for user Ken' },
+        ],
       },
       {
         id: v1(),
@@ -50,6 +57,11 @@ let state: StateType = {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
         firstName: 'Oleg',
         lastName: 'Tulin',
+        messages: [
+          { id: v1(), messageText: 'First message for user Oleg' },
+          { id: v1(), messageText: 'Second message for user Oleg' },
+          { id: v1(), messageText: 'Third message for user Oleg' },
+        ],
       },
       {
         id: v1(),
@@ -57,12 +69,12 @@ let state: StateType = {
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
         firstName: 'Kirill',
         lastName: 'Goncharov',
+        messages: [
+          { id: v1(), messageText: 'First message for user Kirill' },
+          { id: v1(), messageText: 'Second message for user Kirill' },
+          { id: v1(), messageText: 'Third message for user Kirill' },
+        ],
       },
-    ],
-    messages: [
-      { id: v1(), messageText: 'First message for user with ID - 1' },
-      { id: v1(), messageText: 'First message for user with ID - 1' },
-      { id: v1(), messageText: 'First message for user with ID - 1' },
     ],
   },
 
@@ -113,6 +125,41 @@ let state: StateType = {
       },
     ],
   },
+
+  //SideBarFriends
+  friendsPageSideBar: [
+    {
+      id: v1(),
+      avatarUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+      firstName: 'Ken',
+      lastName: 'Olegov',
+    },
+    {
+      id: v1(),
+      avatarUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+      firstName: 'Oleg',
+      lastName: 'Tulin',
+    },
+    {
+      id: v1(),
+      avatarUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
+      firstName: 'Kirill',
+      lastName: 'Goncharov',
+    },
+  ],
+};
+
+export let addPost = (postMessage: string) => {
+  let newPost: PostsType = {
+    user: state.profilePage.userLoggedIn,
+    postText: postMessage,
+    likes: 0,
+  };
+  state.profilePage.posts.push(newPost);
+  rerenderEntireTree(state);
 };
 
 export default state;

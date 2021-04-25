@@ -6,17 +6,40 @@ import c from './DialogItem.module.css';
 //Props Type for Dialog Item
 export type DialogItemPropsType = {
   user: UserType;
+  messagesForUser: (userId: string) => void;
 };
 // Creating component DialogItem
 const DialogItem = (props: DialogItemPropsType) => {
   let path = '/dialogs/' + props.user.id;
 
+  //Call back for user ID
+  let userIDcallBack = () => {
+    props.messagesForUser(props.user.id);
+  };
+
   return (
-    <div className={c.dialog + ' ' + c.active}>
-      <NavLink to={path}>
-        {props.user.firstName} {props.user.lastName}
-      </NavLink>
-    </div>
+    <NavLink onClick={userIDcallBack} to={path} activeClassName={c.activeLink}>
+      <div className={c.dialog}>
+        <div className={c.avatar}>
+          <NavLink
+            onClick={userIDcallBack}
+            to={path}
+            activeClassName={c.activeLink}
+          >
+            <img className={c.image} src={props.user.avatarUrl} alt="" />
+          </NavLink>
+        </div>
+        <div>
+          <NavLink
+            onClick={userIDcallBack}
+            to={path}
+            activeClassName={c.activeLink}
+          >
+            {props.user.firstName} {props.user.lastName}
+          </NavLink>
+        </div>
+      </div>
+    </NavLink>
   );
 };
 

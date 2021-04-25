@@ -10,12 +10,8 @@ export type MessagePropsType = {
 
 // Creating Message Component
 const Message = (props: MessagePropsType) => {
-  let path = '/dialogs/' + props.id;
-  return (
-    <div className={c.message}>
-      <NavLink to={path}>{props.messageText}</NavLink>
-    </div>
-  );
+  //let path = '/dialogs/' + props.id;
+  return <div className={c.message}>{props.messageText}</div>;
 };
 
 export default Message;

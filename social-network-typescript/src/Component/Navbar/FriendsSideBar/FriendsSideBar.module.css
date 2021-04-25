@@ -1,0 +1,17 @@
+.friends {
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  min-width: 60px;
+}
+
+.friends img {
+  height: 50px;
+  width: 50px;
+  border-radius: 20px;
+}
+
+.friendBox {
+}

@@ -9,6 +9,7 @@ type ProfilePropsType = {
   urlBackgroundImg: string;
   userLoggedIn: UserType;
   posts: Array<PostPropsType>;
+  addPost: (addMessage: string) => void;
 };
 
 const Profile = (props: ProfilePropsType) => {
@@ -19,7 +20,7 @@ const Profile = (props: ProfilePropsType) => {
         urlBackgroundImg={props.urlBackgroundImg}
       />
 
-      <MyPosts posts={props.posts} />
+      <MyPosts posts={props.posts} addPost={props.addPost} />
     </div>
   );
 };

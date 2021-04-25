@@ -13,6 +13,7 @@ import { StateType } from './redux/state';
 
 export type AppPropsType = {
   state: StateType;
+  addPost: (addMessage: string) => void;
 };
 
 function App(props: AppPropsType) {
@@ -24,6 +25,7 @@ function App(props: AppPropsType) {
       urlBackgroundImg={props.state.profilePage.urlBackgroundImg}
       userLoggedIn={props.state.profilePage.userLoggedIn}
       posts={props.state.profilePage.posts}
+      addPost={props.addPost}
     />
   );
 
@@ -31,7 +33,7 @@ function App(props: AppPropsType) {
     <div>
       <Header />
       <div className={c.appWrapper}>
-        <Navbar />
+        <Navbar friends={props.state.friendsPageSideBar} />
 
         <div className={c.appWrapperContent}>
           {/* Dialogs */}

@@ -1,8 +1,8 @@
 .nav {
   grid-area: n;
   /* background-color: rgb(117, 76, 76); */
-  padding: 20px;
-  min-width: 200px;
+  padding: 20px 0 20px 10px;
+  min-width: 250px;
 }
 
 .item {
@@ -15,5 +15,24 @@
 }
 
 .item a.activeLink {
-  color: red;
+  font-weight: bold;
+  /* color: red; */
+}
+
+.friendBox {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+}
+
+h3 {
+  color: rgb(36, 36, 53);
+}
+
+.titleFriend {
+  padding: 3px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
 }

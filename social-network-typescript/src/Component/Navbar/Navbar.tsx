@@ -1,8 +1,24 @@
 import React from 'react';
 import c from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
+import { UserType } from '../../redux/state';
+import { FriendsSideBar } from './FriendsSideBar/FriendsSideBar';
 
-const Navbar = () => {
+type NavBarPropsType = {
+  friends: UserType[];
+};
+
+const Navbar = (props: NavBarPropsType) => {
+  let n = props.friends.length;
+  let friend1 = props.friends[0];
+  let friend2 = props.friends[1];
+  let friend3 = props.friends[2];
+
+  const friends = [
+    <FriendsSideBar friend={friend1} />,
+    <FriendsSideBar friend={friend2} />,
+    <FriendsSideBar friend={friend3} />,
+  ];
   return (
     <nav className={c.nav}>
       <div className={c.item}>
@@ -29,6 +45,14 @@ const Navbar = () => {
         <NavLink to="/settings" activeClassName={c.activeLink}>
           Settings
         </NavLink>
+      </div>
+
+      {/* 
+      Friends
+      */}
+      <div className={c.titleFriend}>
+        <h3>Friends</h3>
+        <div className={c.friendBox}>{friends}</div>
       </div>
     </nav>
   );
