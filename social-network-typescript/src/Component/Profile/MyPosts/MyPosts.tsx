@@ -24,9 +24,6 @@ const MyPosts: React.FC<MyPostsPropsType> = ({ posts, addPost }) => {
       addPost(text);
       newPostElement.current.value = '';
     }
-    
-    //newPostElement.current.value = '';
-    //newPostElement.current?.value = '';
   };
 
   return (
