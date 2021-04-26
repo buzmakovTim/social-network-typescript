@@ -19,8 +19,12 @@ const MyPosts: React.FC<MyPostsPropsType> = ({ posts, addPost }) => {
   let newPostElement = React.createRef<HTMLTextAreaElement>();
 
   let addPostFunction = () => {
-    let text: string = newPostElement.current?.value as string;
-    addPost(text);
+    if(newPostElement.current) {
+      let text = newPostElement.current.value;
+      addPost(text);
+      newPostElement.current.value = '';
+    }
+    
     //newPostElement.current.value = '';
     //newPostElement.current?.value = '';
   };

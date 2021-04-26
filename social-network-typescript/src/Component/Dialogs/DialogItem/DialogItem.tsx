@@ -27,7 +27,7 @@ const DialogItem = (props: DialogItemPropsType) => {
             activeClassName={c.activeLink}
           >
             <img className={c.image} src={props.user.avatarUrl} alt="" />
-          </NavLink>
+    </NavLink>
         </div>
         <div>
           <NavLink
