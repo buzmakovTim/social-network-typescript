@@ -15,7 +15,7 @@ type ProfilePropsType = {
 };
 
 //
-// Comments Test
+// Comments Test2
 //
 
 const Profile = (props: ProfilePropsType) => {
