@@ -13,7 +13,8 @@ import { StateType } from './redux/state';
 
 export type AppPropsType = {
   state: StateType;
-  addPost: (addMessage: string) => void;
+  addPost: () => void;
+  updateNewPostText: (newPostText: string) => void;
 };
 
 function App(props: AppPropsType) {
@@ -26,6 +27,8 @@ function App(props: AppPropsType) {
       userLoggedIn={props.state.profilePage.userLoggedIn}
       posts={props.state.profilePage.posts}
       addPost={props.addPost}
+      newPostText={props.state.profilePage.newPostText}
+      updateNewPostText={props.updateNewPostText}
     />
   );
 

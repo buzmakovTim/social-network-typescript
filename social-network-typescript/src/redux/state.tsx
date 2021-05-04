@@ -26,6 +26,7 @@ export type UserProfilePageType = {
   urlBackgroundImg: string;
   userLoggedIn: UserType;
   posts: PostsType[];
+  newPostText: string
 };
 
 export type StateType = {
@@ -124,6 +125,7 @@ export let state: StateType = {
         likes: 6,
       },
     ],
+    newPostText: '',
   },
 
   //SideBarFriends
@@ -152,13 +154,19 @@ export let state: StateType = {
   ],
 };
 
-export let addPost = (postMessage: string) => {
+export let updateNewPostText = (newPostText: string) => {
+  state.profilePage.newPostText = newPostText
+  rerenderEntireTree(state);
+} 
+
+export let addPost = () => {
   let newPost: PostsType = {
     user: state.profilePage.userLoggedIn,
-    postText: postMessage,
+    postText: state.profilePage.newPostText,
     likes: 0,
   };
   state.profilePage.posts.push(newPost);
+  state.profilePage.newPostText = '';
   rerenderEntireTree(state);
 };
 
