@@ -14,6 +14,10 @@ type ProfilePropsType = {
   updateNewPostText: (newPostText: string) => void;
 };
 
+//
+// Comments
+//
+
 const Profile = (props: ProfilePropsType) => {
   return (
     <div>
