@@ -1,5 +1,13 @@
 import { v1 } from 'uuid';
-import { rerenderEntireTree } from '../render';
+// import { rerenderEntireTree } from '../render';
+
+export type AppPropsType = {
+  state: StateType;
+};
+
+let rerenderEntireTree = (state: StateType) => {
+  console.log("")
+}
 
 export type UserType = {
   id: string;
@@ -169,5 +177,10 @@ export let addPost = () => {
   state.profilePage.newPostText = '';
   rerenderEntireTree(state);
 };
+
+export const subscribe = (observer: any) => {
+  rerenderEntireTree = observer;
+}
+
 
 export default state;
