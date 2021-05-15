@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, ChangeEvent } from 'react';
 import c from './Dialogs.module.css';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import { isPropertyAssignment, ListFormat } from 'typescript';
 import DialogItem, { DialogItemPropsType } from './DialogItem/DialogItem';
 import Message, { MessagePropsType } from './Message/Message';
-import { MessageType, UserType } from '../../redux/state';
+import { ActionsType, MessageType, sendMessageActionTypeAC, updateNewMessageTextActionTypeAC, UserType } from '../../redux/state';
 
 type PropsType = {
   users: Array<UserType>;
@@ -12,6 +12,8 @@ type PropsType = {
 
 type DialogsPropsType = {
   data: PropsType;
+  dispatch: (action: ActionsType) => void
+  newMessage: string
 };
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -37,12 +39,18 @@ const Dialogs = (props: DialogsPropsType) => {
     <DialogItem user={user} messagesForUser={messagesForUser} />
   ));
 
-  let textArea = useRef<HTMLTextAreaElement>(null);
+  
+  //
+  //
+  let textAreaOnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    props.dispatch(updateNewMessageTextActionTypeAC(e.currentTarget.value))
+  }
+  //let textArea = useRef<HTMLTextAreaElement>(null);
   //
   // Check Text Area content
-  const onClickHandler = () => {
-    let text = textArea.current?.value;
-    alert(text);
+  const sendMessageHandler = () => {
+    //let text = textArea.current?.value;
+    props.dispatch(sendMessageActionTypeAC('eeee')) // TEST ID need to find out
   };
 
   return (
@@ -51,9 +59,12 @@ const Dialogs = (props: DialogsPropsType) => {
       <div>
         <div className={c.messages}>{messages}</div>
         <div className={c.sendMessage}>
-          <textarea ref={textArea} className={c.textArea}></textarea>
+          <textarea onChange={e => textAreaOnChangeHandler(e)} 
+                    value={props.newMessage} 
+                    placeholder={'Enter new message'}
+                    className={c.textArea}></textarea>
           <div>
-            <button onClick={onClickHandler} className={c.sendButton}>
+            <button onClick={sendMessageHandler} className={c.sendButton}>
               Send
             </button>
           </div>

@@ -1,16 +1,17 @@
 import React, { ChangeEvent, TextareaHTMLAttributes, useRef } from 'react';
+import { ActionsType, addPostAC, changeNewTextActionTypeAC } from '../../../redux/state';
 import c from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostPropsType } from './Post/Post';
 
 type MyPostsPropsType = {
   posts: Array<PostPropsType>;
-  addPost: () => void;
   newPostText: string;
-  updateNewPostText: (newPostText: string) => void;
+
+  dispatch: (action: ActionsType) => void
 };
 
-const MyPosts: React.FC<MyPostsPropsType> = ({ posts, addPost, newPostText, updateNewPostText }) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({ posts, newPostText, dispatch }) => {
   //
   //Creating array for Posts using MAP
   let _posts = posts.map((post: PostPropsType) => (
@@ -21,16 +22,16 @@ const MyPosts: React.FC<MyPostsPropsType> = ({ posts, addPost, newPostText, upda
   //let newPostElement = React.createRef<HTMLTextAreaElement>();
 
   let addPostFunction = () => {
-    //if(newPostElement.current) {
-      //let text = newPostElement.current.value;
-      addPost();
-      //newPostElement.current.value = '';
-      //updateNewPostText('')  
-    //}
+    
+    //addPost();
+    //dispatch({type: 'ADD-POST'})
+    dispatch(addPostAC())
+
   };
 
   let onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    updateNewPostText(e.currentTarget.value)
+    //updateNewPostText(e.currentTarget.value)
+    dispatch(changeNewTextActionTypeAC(e.currentTarget.value))
   }
 
   return (

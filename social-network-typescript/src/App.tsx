@@ -9,26 +9,33 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import News from './Component/News/News';
 import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
-import { StateType } from './redux/state';
+import { StoreType } from './redux/state';
 
 export type AppPropsType = {
-  state: StateType;
-  addPost: () => void;
-  updateNewPostText: (newPostText: string) => void;
+  
+  store: StoreType
+  
+  //state: RootStateType;
+  //addPost: () => void;
+  //updateNewPostText: (newPostText: string) => void;
 };
 
-function App(props: AppPropsType) {
+const App: React.FC<AppPropsType> = (props) => {
+
+  const state = props.store.getState()
+
   // Dialogs
-  let dialogs = () => <Dialogs data={props.state.dialogsPage} />;
+  let dialogs = () => <Dialogs data={state.dialogsPage} newMessage={props.store.getState().dialogsPage.newMessageText} dispatch={props.store.dispatch.bind(props.store)}/>;
   // UserProfile
   let userProfile = () => (
     <Profile
-      urlBackgroundImg={props.state.profilePage.urlBackgroundImg}
-      userLoggedIn={props.state.profilePage.userLoggedIn}
-      posts={props.state.profilePage.posts}
-      addPost={props.addPost}
-      newPostText={props.state.profilePage.newPostText}
-      updateNewPostText={props.updateNewPostText}
+      urlBackgroundImg={state.profilePage.urlBackgroundImg}
+      userLoggedIn={state.profilePage.userLoggedIn}
+      posts={state.profilePage.posts}
+      //addPost={props.store.addPost.bind(props.store)}
+      newPostText={state.profilePage.newPostText}
+      dispatch={props.store.dispatch.bind(props.store)}
+      //updateNewPostText={props.store.updateNewPostText.bind(props.store)}
     />
   );
 
@@ -36,7 +43,7 @@ function App(props: AppPropsType) {
     <div>
       <Header />
       <div className={c.appWrapper}>
-        <Navbar friends={props.state.friendsPageSideBar} />
+        <Navbar friends={state.friendsPageSideBar} />
 
         <div className={c.appWrapperContent}>
           {/* Dialogs */}
