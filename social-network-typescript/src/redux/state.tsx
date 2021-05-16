@@ -18,6 +18,7 @@ export type UserType = {
 export type DialogsPageType = {
   users: UserType[]
   newMessageText: string
+  userId: string
 };
 
 export type MessageType = {
@@ -35,6 +36,7 @@ export type UserProfilePageType = {
   userLoggedIn: UserType;
   posts: PostsType[];
   newPostText: string
+  
 };
 
 export type RootStateType = {
@@ -72,8 +74,8 @@ export type StoreType = {
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-
 const SEND_MESSAGE = 'SEND-MESSAGE';
+const SET_USER_ID_FOR_MESSAGE = 'SET-USER-ID-FOR-MESSAGE'
 
 //
 // Action Creators Start
@@ -93,13 +95,19 @@ export const updateNewMessageTextActionTypeAC = (newText: string) => {
   return {
     type: UPDATE_NEW_MESSAGE_TEXT,
     newText: newText
-  }
+  } as const
 }
-export const sendMessageActionTypeAC = (newText: string) => {
+export const sendMessageActionTypeAC = (sendToUserId : string) => {
   return {
     type: SEND_MESSAGE,
-    newText: newText
-  }
+    sendToUserId: sendToUserId
+  } as const
+}
+export const setUserIdForMessage = (userId : string) => {
+  return {
+    type: SET_USER_ID_FOR_MESSAGE,
+    userId: userId
+  } as const
 }
 
 //
@@ -112,8 +120,9 @@ export const sendMessageActionTypeAC = (newText: string) => {
 // or
 export type ActionsType = ReturnType<typeof changeNewTextActionTypeAC> | 
                           ReturnType<typeof addPostAC> | 
-                          ReturnType<typeof updateNewMessageTextActionTypeAC> | 
-                          ReturnType<typeof sendMessageActionTypeAC>
+                          ReturnType<typeof updateNewMessageTextActionTypeAC> |
+                          ReturnType<typeof sendMessageActionTypeAC> |
+                          ReturnType<typeof setUserIdForMessage>
                            //| 
                           //ReturnType<typeof sendMessageActionTypeAC>
 
@@ -167,7 +176,8 @@ let store: StoreType = {
             ],
           },
         ],
-        newMessageText: ''
+        newMessageText: '',
+        userId: ''
       },
 
       //User Profile Page
@@ -293,7 +303,21 @@ let store: StoreType = {
               this._onChange()
         
             } else if (action.type === SEND_MESSAGE) {
-              let test = action.newText
+              const messageToSend = this._state.dialogsPage.newMessageText
+              const userIdSendTo = action.sendToUserId
+              
+              let user = this._state.dialogsPage.users.find( u => u.id === userIdSendTo)
+              if(user) {
+                user.messages?.push({id: v1(), messageText: messageToSend})
+              } else {
+                console.log("User ID not found")
+              }
+              // Add new Message to dialog for particular user.
+              
+              this._onChange()
+            } else if (action.type === SET_USER_ID_FOR_MESSAGE) {
+              this._state.dialogsPage.userId = action.userId
+              //lert(action.userId)
               this._onChange()
         }
     }

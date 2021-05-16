@@ -25,7 +25,7 @@ const App: React.FC<AppPropsType> = (props) => {
   const state = props.store.getState()
 
   // Dialogs
-  let dialogs = () => <Dialogs data={state.dialogsPage} newMessage={props.store.getState().dialogsPage.newMessageText} dispatch={props.store.dispatch.bind(props.store)}/>;
+  let dialogs = () => <Dialogs data={state.dialogsPage} newMessage={props.store.getState().dialogsPage.newMessageText} userId={props.store.getState().dialogsPage.userId} dispatch={props.store.dispatch.bind(props.store)}/>;
   // UserProfile
   let userProfile = () => (
     <Profile

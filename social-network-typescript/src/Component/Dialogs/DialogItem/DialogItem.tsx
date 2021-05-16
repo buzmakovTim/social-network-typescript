@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserType } from '../../../redux/state';
+import { ActionsType, setUserIdForMessage, UserType } from '../../../redux/state';
 import c from './DialogItem.module.css';
 
 //Props Type for Dialog Item
 export type DialogItemPropsType = {
   user: UserType;
-  messagesForUser: (userId: string) => void;
+  messagesForUser: (userId: string) => void; 
+  dispatch: (action: ActionsType) => void
 };
 // Creating component DialogItem
 const DialogItem = (props: DialogItemPropsType) => {
@@ -15,6 +16,7 @@ const DialogItem = (props: DialogItemPropsType) => {
   //Call back for user ID
   let userIDcallBack = () => {
     props.messagesForUser(props.user.id);
+    props.dispatch(setUserIdForMessage(props.user.id))
   };
 
   return (
