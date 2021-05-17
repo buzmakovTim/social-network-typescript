@@ -3,6 +3,7 @@ import c from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import { UserType } from '../../redux/state';
 import { FriendsSideBar } from './FriendsSideBar/FriendsSideBar';
+import { v1 } from 'uuid';
 
 type NavBarPropsType = {
   friends: UserType[];
@@ -15,9 +16,9 @@ const Navbar = (props: NavBarPropsType) => {
   let friend3 = props.friends[2];
 
   const friends = [
-    <FriendsSideBar friend={friend1} />,
-    <FriendsSideBar friend={friend2} />,
-    <FriendsSideBar friend={friend3} />,
+    <FriendsSideBar key={v1()} friend={friend1} />,
+    <FriendsSideBar key={v1()} friend={friend2} />,
+    <FriendsSideBar key={v1()} friend={friend3} />,
   ];
   return (
     <nav className={c.nav}>

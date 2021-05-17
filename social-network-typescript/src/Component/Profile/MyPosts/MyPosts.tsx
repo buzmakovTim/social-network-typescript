@@ -1,5 +1,7 @@
 import React, { ChangeEvent, TextareaHTMLAttributes, useRef } from 'react';
-import { ActionsType, addPostAC, changeNewTextActionTypeAC } from '../../../redux/state';
+import { v1 } from 'uuid';
+import { addPostAC, changeNewTextActionTypeAC } from '../../../redux/profilePage-reducer';
+import { ActionsType } from '../../../redux/state';
 import c from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostPropsType } from './Post/Post';
@@ -15,7 +17,7 @@ const MyPosts: React.FC<MyPostsPropsType> = ({ posts, newPostText, dispatch }) =
   //
   //Creating array for Posts using MAP
   let _posts = posts.map((post: PostPropsType) => (
-    <Post user={post.user} postText={post.postText} likes={post.likes} />
+    <Post key={v1()} user={post.user} postText={post.postText} likes={post.likes} />
   ));
 
   //let newPostElement = useRef<HTMLTextAreaElement>(null);
@@ -31,7 +33,8 @@ const MyPosts: React.FC<MyPostsPropsType> = ({ posts, newPostText, dispatch }) =
 
   let onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     //updateNewPostText(e.currentTarget.value)
-    dispatch(changeNewTextActionTypeAC(e.currentTarget.value))
+    let action = changeNewTextActionTypeAC(e.currentTarget.value) // creating action with action creator
+    dispatch(action)
   }
 
   return (

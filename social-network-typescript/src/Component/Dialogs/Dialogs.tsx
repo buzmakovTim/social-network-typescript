@@ -4,7 +4,9 @@ import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import { isPropertyAssignment, ListFormat } from 'typescript';
 import DialogItem, { DialogItemPropsType } from './DialogItem/DialogItem';
 import Message, { MessagePropsType } from './Message/Message';
-import { ActionsType, MessageType, sendMessageActionTypeAC, setUserIdForMessage, updateNewMessageTextActionTypeAC, UserType } from '../../redux/state';
+import { ActionsType, MessageType, UserType } from '../../redux/state';
+import { v1 } from 'uuid';
+import { sendMessageActionTypeAC, updateNewMessageTextActionTypeAC } from '../../redux/dialogsPage-reducer';
 
 type PropsType = {
   users: Array<UserType>;
@@ -25,7 +27,9 @@ const Dialogs = (props: DialogsPropsType) => {
   
   //
   //
-  //let [userId, setUserId] = useState(props.data.users[0].id)
+  let [userId, setUserId] = useState(props.data.users[0].id)
+  //alert(userId)
+  
   //props.dispatch(setUserIdForMessage(userId))
   // let userIdSendTo: string = ''
   //
@@ -48,12 +52,12 @@ const Dialogs = (props: DialogsPropsType) => {
   //
   //Creating array for Messages using MAP
   let messages = componentMessages?.map((m) => (
-    <Message id={m.id} messageText={m.messageText} />
+    <Message key={v1()} id={m.id} messageText={m.messageText} />
   ));
   //
   //Creating array for Dialogs using MAP
   let dialogs = props.data.users.map((user) => (
-    <DialogItem user={user} messagesForUser={messagesForUser} dispatch={props.dispatch}/>
+    <DialogItem key={v1()} user={user} messagesForUser={messagesForUser} dispatch={props.dispatch}/>
   ));
 
   
@@ -67,7 +71,10 @@ const Dialogs = (props: DialogsPropsType) => {
   // Check Text Area content
   const sendMessageHandler = () => {
     //let text = textArea.current?.value;
-    props.dispatch(sendMessageActionTypeAC(props.userId)) // TEST ID need to find out
+    if(props.newMessage) {
+        props.dispatch(sendMessageActionTypeAC(props.userId ? props.userId : userId))
+    }
+    
   };
 
   return (
@@ -78,7 +85,7 @@ const Dialogs = (props: DialogsPropsType) => {
         <div className={c.sendMessage}>
           <textarea onChange={e => textAreaOnChangeHandler(e)} 
                     value={props.newMessage} 
-                    placeholder={'Enter new message'}
+                    placeholder={'Enter your message'}
                     className={c.textArea}></textarea>
           <div>
             <button onClick={sendMessageHandler} className={c.sendButton}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ActionsType, setUserIdForMessage, UserType } from '../../../redux/state';
+import { setUserIdForMessage } from '../../../redux/dialogsPage-reducer';
+import { ActionsType, UserType } from '../../../redux/state';
 import c from './DialogItem.module.css';
 
 //Props Type for Dialog Item

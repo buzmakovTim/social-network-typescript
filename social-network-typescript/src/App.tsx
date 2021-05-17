@@ -9,12 +9,12 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import News from './Component/News/News';
 import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
-import { StoreType } from './redux/state';
+import { ActionsType, RootStateType, StoreType } from './redux/state';
 
 export type AppPropsType = {
   
-  store: StoreType
-  
+  state: RootStateType
+  dispatch: (action: ActionsType) => void 
   //state: RootStateType;
   //addPost: () => void;
   //updateNewPostText: (newPostText: string) => void;
@@ -22,10 +22,10 @@ export type AppPropsType = {
 
 const App: React.FC<AppPropsType> = (props) => {
 
-  const state = props.store.getState()
+  const state = props.state
 
   // Dialogs
-  let dialogs = () => <Dialogs data={state.dialogsPage} newMessage={props.store.getState().dialogsPage.newMessageText} userId={props.store.getState().dialogsPage.userId} dispatch={props.store.dispatch.bind(props.store)}/>;
+  let dialogs = () => <Dialogs data={state.dialogsPage} newMessage={state.dialogsPage.newMessageText} userId={state.dialogsPage.userId} dispatch={props.dispatch}/>;
   // UserProfile
   let userProfile = () => (
     <Profile
@@ -34,7 +34,7 @@ const App: React.FC<AppPropsType> = (props) => {
       posts={state.profilePage.posts}
       //addPost={props.store.addPost.bind(props.store)}
       newPostText={state.profilePage.newPostText}
-      dispatch={props.store.dispatch.bind(props.store)}
+      dispatch={props.dispatch}
       //updateNewPostText={props.store.updateNewPostText.bind(props.store)}
     />
   );
