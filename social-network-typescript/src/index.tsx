@@ -17,7 +17,7 @@ import { RootStateType } from './redux/state';
     ReactDOM.render(
       <BrowserRouter>
         <React.StrictMode>
-          <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+          <App store={store} dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>
       </BrowserRouter>,
       document.getElementById('root')

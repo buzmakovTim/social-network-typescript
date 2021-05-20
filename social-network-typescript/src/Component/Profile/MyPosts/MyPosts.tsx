@@ -9,32 +9,23 @@ import { PostPropsType } from './Post/Post';
 type MyPostsPropsType = {
   posts: Array<PostPropsType>;
   newPostText: string;
-
-  dispatch: (action: ActionsType) => void
+  addPost: () => void;
+  updateNewPostText: (newText: string) => void;
 };
 
-const MyPosts: React.FC<MyPostsPropsType> = ({ posts, newPostText, dispatch }) => {
+const MyPosts: React.FC<MyPostsPropsType> = ({ posts, newPostText, addPost, updateNewPostText }) => {
   //
   //Creating array for Posts using MAP
   let _posts = posts.map((post: PostPropsType) => (
     <Post key={v1()} user={post.user} postText={post.postText} likes={post.likes} />
   ));
 
-  //let newPostElement = useRef<HTMLTextAreaElement>(null);
-  //let newPostElement = React.createRef<HTMLTextAreaElement>();
-
   let addPostFunction = () => {
-    
-    //addPost();
-    //dispatch({type: 'ADD-POST'})
-    dispatch(addPostAC())
-
+    addPost();
   };
 
   let onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //updateNewPostText(e.currentTarget.value)
-    let action = changeNewTextActionTypeAC(e.currentTarget.value) // creating action with action creator
-    dispatch(action)
+    updateNewPostText(e.currentTarget.value)
   }
 
   return (

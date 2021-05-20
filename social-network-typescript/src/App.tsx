@@ -10,10 +10,12 @@ import News from './Component/News/News';
 import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
 import { ActionsType, RootStateType, StoreType } from './redux/state';
+import DialogsContainer from './Component/Dialogs/DialogsContainer';
 
 export type AppPropsType = {
   
-  state: RootStateType
+  store: StoreType;
+  //state: RootStateType
   dispatch: (action: ActionsType) => void 
   //state: RootStateType;
   //addPost: () => void;
@@ -22,22 +24,7 @@ export type AppPropsType = {
 
 const App: React.FC<AppPropsType> = (props) => {
 
-  const state = props.state
-
-  // Dialogs
-  let dialogs = () => <Dialogs data={state.dialogsPage} newMessage={state.dialogsPage.newMessageText} userId={state.dialogsPage.userId} dispatch={props.dispatch}/>;
-  // UserProfile
-  let userProfile = () => (
-    <Profile
-      urlBackgroundImg={state.profilePage.urlBackgroundImg}
-      userLoggedIn={state.profilePage.userLoggedIn}
-      posts={state.profilePage.posts}
-      //addPost={props.store.addPost.bind(props.store)}
-      newPostText={state.profilePage.newPostText}
-      dispatch={props.dispatch}
-      //updateNewPostText={props.store.updateNewPostText.bind(props.store)}
-    />
-  );
+  const state = props.store.getState()
 
   return (
     <div>
@@ -46,10 +33,13 @@ const App: React.FC<AppPropsType> = (props) => {
         <Navbar friends={state.friendsPageSideBar} />
 
         <div className={c.appWrapperContent}>
+
           {/* Dialogs */}
-          <Route path="/dialogs" render={dialogs} />
+          <Route path="/dialogs" render={() => <DialogsContainer store={props.store}/>} />
+
           {/* Profile */}
-          <Route path="/profile" render={userProfile} />
+          <Route path="/profile" render={() => <Profile store={props.store} />} />
+
 
           <Route path="/news" component={News} />
           <Route path="/music" component={Music} />
