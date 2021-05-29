@@ -5,8 +5,10 @@ import reportWebVitals from './reportWebVitals';
 //import state, { addPost, StateType, subscribe, updateNewPostText } from './redux/state';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import store from './redux/redux-store';
+// import store from './redux/redux-store';
 import { RootStateType } from './redux/state';
+import {Provider} from 'react-redux'
+import { store } from './redux/redux-store';
 
 
 // export type AppPropsType = {
@@ -17,7 +19,9 @@ import { RootStateType } from './redux/state';
     ReactDOM.render(
       <BrowserRouter>
         <React.StrictMode>
-          <App store={store} dispatch={store.dispatch.bind(store)}/>
+          <Provider store={store}>
+              <App />
+          </Provider>
         </React.StrictMode>
       </BrowserRouter>,
       document.getElementById('root')

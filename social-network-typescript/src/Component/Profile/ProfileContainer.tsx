@@ -7,21 +7,21 @@ import c from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfileInfoContainer from './ProfileInfo/ProfileInfoContainer';
 
-type ProfilePropsType = {
-  //urlBackgroundImg: string;
-  //userLoggedIn: UserType;
-  store: StoreType;
-};
+// type ProfilePropsType = {
+//   //urlBackgroundImg: string;
+//   //userLoggedIn: UserType;
+//   store: StoreType;
+// };
 
 //
 // Comments Test2
 //
 
-const Profile = (props: ProfilePropsType) => {
+const Profile = () => {
   return (
     <div>
-      <ProfileInfoContainer  store={props.store}/>
-      <MyPostsContainer store={props.store}/>
+      <ProfileInfoContainer />
+      <MyPostsContainer />
     </div>
   );
 };

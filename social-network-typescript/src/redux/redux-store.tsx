@@ -1,17 +1,19 @@
 import React from 'react';
-import {combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import dialogPageReducer from './dialogsPage-reducer';
 import friendsPageSideBarReducer from './friendsPageSideBar-reducer';
 import profilePageReducer from './profilePage-reducer';
 import { StoreType } from './state';
+import thunkMiddleware from 'redux-thunk'
 
-let reducers = combineReducers({
+export const rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogPageReducer,
     friendsPageSideBar: friendsPageSideBarReducer
 }) 
 
-let store: StoreType = createStore(reducers);
 
+export type RootReducerType = typeof rootReducer
+export type AppStateType = ReturnType<RootReducerType>
 
-export default store;
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

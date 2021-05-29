@@ -5,6 +5,7 @@ import { ActionsType, DialogsPageType, PostsType, RootStateType } from './state'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const SET_USER_ID_FOR_MESSAGE = 'SET-USER-ID-FOR-MESSAGE'
+const GET_MESSAGES = 'GET-MESSAGES'
 
 // Initial state for Dialog Page
 let initialState = {
@@ -68,7 +69,7 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
             
             let user = state.users.find( u => u.id === userIdSendTo)
             if(user) {
-            user.messages?.push({id: v1(), messageText: messageToSend})
+              user.messages?.push({id: v1(), messageText: messageToSend})
             } else {
             console.log("User ID not found")
             }
