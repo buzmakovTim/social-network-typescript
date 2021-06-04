@@ -11,6 +11,7 @@ import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
 import { ActionsType, RootStateType, StoreType } from './redux/state';
 import NavbarContainer from './Component/Navbar/NavbarContainer';
+import Users from './Component/Users/Users';
 
 // import DialogsContainer from './Component/Dialogs/DialogsContainer';
 
@@ -44,12 +45,15 @@ const App: React.FC<AppPropsType> = (props) => {
           {/* <Route path="/dialogs" render={() => <DialogsContainer store={props.store}/>} /> */}
 
           {/* Profile */}
-        <Route path="/profile" render={() => <ProfileContainer />} />
+          <Route path="/profile" render={() => <ProfileContainer />} />
 
+          {/* Find Users */}
+          <Route path="/users"  render={() => <Users />} />
 
           <Route path="/news" component={News} />
           <Route path="/music" component={Music} />
           <Route path="/settings" component={Settings} />
+          
 
           {/* Main default page is Profile */}
           <Redirect to="/profile" />

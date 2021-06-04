@@ -5,11 +5,13 @@ import friendsPageSideBarReducer from './friendsPageSideBar-reducer';
 import profilePageReducer from './profilePage-reducer';
 import { StoreType } from './state';
 import thunkMiddleware from 'redux-thunk'
+import usersPageReducer from './usersPage-reducer';
 
 export const rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogPageReducer,
-    friendsPageSideBar: friendsPageSideBarReducer
+    friendsPageSideBar: friendsPageSideBarReducer,
+    users: usersPageReducer
 }) 
 
 

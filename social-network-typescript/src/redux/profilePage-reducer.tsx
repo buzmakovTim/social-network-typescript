@@ -75,7 +75,6 @@ const profilePageReducer = (state: UserProfilePageType = initialState, action: A
           return stateCopy    
         }
             
-
         case CHANGE_NEW_POST_TEXT: {
           const stateCopy = {...state}
           stateCopy.newPostText = action.newText

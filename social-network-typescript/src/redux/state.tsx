@@ -2,6 +2,7 @@ import { addSyntheticTrailingComment } from 'typescript';
 import { v1 } from 'uuid';
 import dialogPageReducer, { sendMessageActionTypeAC, setUserIdForMessageAC, updateNewMessageTextActionTypeAC } from './dialogsPage-reducer';
 import profilePageReducer, { addPostAC, changeNewTextActionTypeAC } from './profilePage-reducer';
+import { followAC, setUsersAC, unfollowAC } from './usersPage-reducer';
 // import { rerenderEntireTree } from '../render';
 
 
@@ -38,13 +39,31 @@ export type UserProfilePageType = {
   userLoggedIn: UserType;
   posts: PostsType[];
   newPostText: string
-  
 };
+
+// NEW TYPES
+export type LocationType = {
+  city: string
+  country: string
+}
+
+export type UserTypeNEW = {
+  id: number 
+  followed: boolean
+  fullName: string, 
+  status: string, 
+  location: LocationType
+}
+
+export type UsersPageType = {
+  users: UserTypeNEW[];
+}
 
 export type RootStateType = {
   profilePage: UserProfilePageType;
   dialogsPage: DialogsPageType;
   friendsPageSideBar: UserType[];
+  usersPage: UsersPageType;
 };
 
 export type StoreType = {
@@ -68,7 +87,10 @@ export type ActionsType = ReturnType<typeof changeNewTextActionTypeAC> |
                           ReturnType<typeof addPostAC> | 
                           ReturnType<typeof updateNewMessageTextActionTypeAC> |
                           ReturnType<typeof sendMessageActionTypeAC> |
-                          ReturnType<typeof setUserIdForMessageAC>
+                          ReturnType<typeof setUserIdForMessageAC> |
+                          ReturnType<typeof followAC> |
+                          ReturnType<typeof unfollowAC> |
+                          ReturnType<typeof setUsersAC>
                            //| 
                           //ReturnType<typeof sendMessageActionTypeAC>
 

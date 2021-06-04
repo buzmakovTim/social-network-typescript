@@ -33,6 +33,11 @@ const Navbar = (props: NavBarPropsType) => {
         </NavLink>
       </div>
       <div className={c.item}>
+        <NavLink to="/users" activeClassName={c.activeLink}>
+          Find Users
+        </NavLink>
+      </div>
+      <div className={c.item}>
         <NavLink to="/news" activeClassName={c.activeLink}>
           News
         </NavLink>

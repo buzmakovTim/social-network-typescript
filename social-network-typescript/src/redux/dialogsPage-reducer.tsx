@@ -1,4 +1,6 @@
 import React from 'react';
+import { useStore } from 'react-redux';
+import { useParams } from 'react-router';
 import { v1 } from 'uuid';
 import { ActionsType, DialogsPageType, PostsType, RootStateType } from './state';
 
@@ -59,23 +61,31 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
     
     switch(action.type){
 
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText
-            return state
-
-        case SEND_MESSAGE:
-            const messageToSend = state.newMessageText
-            const userIdSendTo = action.sendToUserId
+        case UPDATE_NEW_MESSAGE_TEXT: {
+          
+          const stateCopy = {...state}
+          stateCopy.newMessageText = action.newText
+          return stateCopy
+        }
             
-            let user = state.users.find( u => u.id === userIdSendTo)
-            if(user) {
-              user.messages?.push({id: v1(), messageText: messageToSend})
-            } else {
-            console.log("User ID not found")
-            }
-            // Add new Message to dialog for particular user.
-            state.newMessageText = ''
-            return state
+
+        case SEND_MESSAGE: {
+          
+          const messageToSend = state.newMessageText
+          const userIdSendTo = action.sendToUserId
+          
+          let user = state.users.find( u => u.id === userIdSendTo)
+          if(user) {
+            user.messages?.push({id: v1(), messageText: messageToSend})
+          } else {
+          console.log("User ID not found")
+          }
+          // Add new Message to dialog for particular user.
+          state.newMessageText = ''
+          return state
+
+        }
+            
         
         case SET_USER_ID_FOR_MESSAGE: {
           
@@ -85,9 +95,7 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
           return stateCopy
         }
             
-            
-            
-
+        // In all other cases return state
         default:
             return state 
     }

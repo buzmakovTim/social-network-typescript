@@ -11,11 +11,11 @@ import {Provider} from 'react-redux'
 import { store } from './redux/redux-store';
 
 
-// export type AppPropsType = {
-//     store: StoreType;
-//   };
+// We don't need  rerenderEntireTree furction and store.subscribe 
+// once we start using react-redux
+
   
-  let rerenderEntireTree = (state: RootStateType) => {
+  //let rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
       <BrowserRouter>
         <React.StrictMode>
@@ -26,14 +26,16 @@ import { store } from './redux/redux-store';
       </BrowserRouter>,
       document.getElementById('root')
     );
-  };
+  //};
   
-  rerenderEntireTree(store.getState());
 
-  store.subscribe( () => {
-    let state = store.getState()
-    rerenderEntireTree(state)
-  })
+
+  //rerenderEntireTree(store.getState());
+
+  // store.subscribe( () => {
+  //   let state = store.getState()
+  //   rerenderEntireTree(state)
+  // })
   
 
 // If you want to start measuring performance in your app, pass a function
