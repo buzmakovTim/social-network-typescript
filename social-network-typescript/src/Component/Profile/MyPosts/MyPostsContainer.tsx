@@ -53,7 +53,9 @@ let mapsDispatchToProps = (dispatch: any) => {
     addPost: () => {
       dispatch(addPostAC())
     },
-    updateNewPostText: (newTe) => {}
+    updateNewPostText: (newText: string) => {
+      dispatch(changeNewTextActionTypeAC(newText))
+    }
   }
 }
 

@@ -1,21 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { setUserIdForMessage } from '../../../redux/dialogsPage-reducer';
+import { setUserIdForMessageAC } from '../../../redux/dialogsPage-reducer';
 import { ActionsType, UserType } from '../../../redux/state';
 import c from './DialogItem.module.css';
 
 //Props Type for Dialog Item
 export type DialogItemPropsType = {
   user: UserType;
-  setUserIdFotMessages: (userId: string) => void; 
+  //setUserIdFotMessages: (userId: string) => void; 
 };
 // Creating component DialogItem
 const DialogItem = (props: DialogItemPropsType) => {
-  let path = '/dialogs/' + props.user.id;
+  
+  const dispatch = useDispatch();
 
+  let path = '/dialogs/' + props.user.id;
+  
+  
   //Call back for user ID
   let userIDcallBack = () => {
-    props.setUserIdFotMessages(props.user.id);
+    dispatch(setUserIdForMessageAC(props.user.id))
+    
+    //props.setUserIdFotMessages(props.user.id);
     //props.dispatch(setUserIdForMessage(props.user.id))
   };
 

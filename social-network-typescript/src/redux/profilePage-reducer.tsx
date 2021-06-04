@@ -62,20 +62,26 @@ const profilePageReducer = (state: UserProfilePageType = initialState, action: A
 
     switch(action.type){
 
-        case ADD_POST:
-            let newPost: PostsType = {
-                user: state.userLoggedIn,
-                //postText: action.postText,
-                postText: state.newPostText, 
-                likes: 0,
-              };
-              state.posts.push(newPost);
-              state.newPostText = '';
-            return state    
+        case ADD_POST: {
+          const stateCopy = {...state}
+          let newPost: PostsType = {
+              user: {...state.userLoggedIn},
+              //postText: action.postText,
+              postText: state.newPostText, 
+              likes: 0,
+            };
+            stateCopy.posts.push(newPost);
+            stateCopy.newPostText = '';
+          return stateCopy    
+        }
+            
 
-        case CHANGE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return state
+        case CHANGE_NEW_POST_TEXT: {
+          const stateCopy = {...state}
+          stateCopy.newPostText = action.newText
+          return stateCopy
+        }
+            
         
         default: 
               return state

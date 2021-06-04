@@ -5,7 +5,7 @@ import { ActionsType, DialogsPageType, PostsType, RootStateType } from './state'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 const SET_USER_ID_FOR_MESSAGE = 'SET-USER-ID-FOR-MESSAGE'
-const GET_MESSAGES = 'GET-MESSAGES'
+// const GET_MESSAGES = 'GET-MESSAGES'
 
 // Initial state for Dialog Page
 let initialState = {
@@ -77,9 +77,16 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
             state.newMessageText = ''
             return state
         
-        case SET_USER_ID_FOR_MESSAGE:
-            state.userId = action.userId
-            return state
+        case SET_USER_ID_FOR_MESSAGE: {
+          
+          const stateCopy = {...state}
+          stateCopy.userId = action.userId
+            
+          return stateCopy
+        }
+            
+            
+            
 
         default:
             return state 
@@ -100,7 +107,7 @@ export const updateNewMessageTextActionTypeAC = (newText: string) => {
       sendToUserId: sendToUserId
     } as const
   }
-  export const setUserIdForMessage = (userId : string) => {
+  export const setUserIdForMessageAC = (userId : string) => {
     return {
       type: SET_USER_ID_FOR_MESSAGE,
       userId: userId
