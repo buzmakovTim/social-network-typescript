@@ -11,7 +11,7 @@ export const rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogPageReducer,
     friendsPageSideBar: friendsPageSideBarReducer,
-    users: usersPageReducer
+    usersPage: usersPageReducer
 }) 
 
 

@@ -1,26 +1,44 @@
 import React from 'react';
 import { addSyntheticTrailingComment, FlowLabel } from 'typescript';
 import { v1 } from 'uuid';
-import { ActionsType, PostsType, UserProfilePageType, UsersPageType, UserTypeNEW } from './state';
+import { ActionsType } from './state';
+
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
 // Initial state for Dialog Page
-let initialState: UsersPageType = {
+let initialState: InitialStateType = {
     users : [
-      // {id: 1, followed: true, fullName: "Tim", status: "I'm the boss", location: {city: 'Vancouver', country: 'Canada'}},
-      // {id: 2, followed: false, fullName: "Dima", status: "I'm the boss 2", location: {city: 'Calgary', country: 'Canada'}},
-      // {id: 3, followed: false, fullName: "Oleg", status: "I'm the boss 3", location: {city: 'Toronto', country: 'Canada'}},
+            //{name: "Tim", id: 1, uniqueUrlName: '', photos: {small: '', large: ''}, status: 'Status', followed: true},
+            //{name: "Tim", id: 2, uniqueUrlName: '', photos: {small: '', large: ''}, status: 'Status', followed: true},
+            //{name: "Tim", id: 3, uniqueUrlName: '', photos: {small: '', large: ''}, status: 'Status', followed: true},
     ]
   }
 
 // state: DialogsPageType = initialState 
 // If state not provided we gonna use  initial value initialState
+export type PhotosType = {
+  small: string
+  large: string
+}
+
+export type UserType = {
+  name: string
+  id: number
+  uniqueUrlName: string
+  photos: PhotosType
+  status: string,
+  followed: boolean 
+}
+
+export type InitialStateType = {
+  users: UserType[]
+}
 
 
-const usersPageReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
+const usersPageReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
     switch(action.type){
 
@@ -74,7 +92,7 @@ export const unfollowAC = (userId: number) => {
       userID: userId
     } as const
   }
-export const setUsersAC = (users: UserTypeNEW[]) => {
+export const setUsersAC = (users: UserType[]) => {
     return {
       type: SET_USERS,
       users: users

@@ -47,12 +47,19 @@ export type LocationType = {
   country: string
 }
 
+export type PhotosType = {
+  small: string
+  large: string
+}
+
 export type UserTypeNEW = {
-  id: number 
-  followed: boolean
-  fullName: string, 
-  status: string, 
-  location: LocationType
+  name: string
+  id: number
+  uniqueUrlName: string
+  photos: PhotosType
+  status: string,
+  followed: boolean 
+  //location: LocationType
 }
 
 export type UsersPageType = {

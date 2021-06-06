@@ -11,11 +11,14 @@ import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
 import { ActionsType, RootStateType, StoreType } from './redux/state';
 import NavbarContainer from './Component/Navbar/NavbarContainer';
-import Users from './Component/Users/Users';
+
+import { UsersContainer } from './Component/Users/UsersContainer';
+
+// import { UsersContainer } from './Component/Users/UsersContainer';
 
 // import DialogsContainer from './Component/Dialogs/DialogsContainer';
 
-export type AppPropsType = {
+//export type AppPropsType = {
   
   //store: StoreType;
   
@@ -24,9 +27,9 @@ export type AppPropsType = {
   //state: RootStateType;
   //addPost: () => void;
   //updateNewPostText: (newPostText: string) => void;
-};
+//};
 
-const App: React.FC<AppPropsType> = (props) => {
+const App = () => {
 
   //const state = props.store.getState()
 
@@ -48,8 +51,7 @@ const App: React.FC<AppPropsType> = (props) => {
           <Route path="/profile" render={() => <ProfileContainer />} />
 
           {/* Find Users */}
-          <Route path="/users"  render={() => <Users />} />
-
+          <Route path="/users"  render={() => <UsersContainer />} />
           <Route path="/news" component={News} />
           <Route path="/music" component={Music} />
           <Route path="/settings" component={Settings} />
