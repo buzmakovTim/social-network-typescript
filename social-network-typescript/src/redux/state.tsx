@@ -47,12 +47,12 @@ export type LocationType = {
   country: string
 }
 
-export type PhotosType = {
+type PhotosType = {
   small: string
   large: string
 }
 
-export type UserTypeNEW = {
+type UserTypeNEW = {
   name: string
   id: number
   uniqueUrlName: string
@@ -62,7 +62,7 @@ export type UserTypeNEW = {
   //location: LocationType
 }
 
-export type UsersPageType = {
+type UsersPageType = {
   users: UserTypeNEW[];
 }
 

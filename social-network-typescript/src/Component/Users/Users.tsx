@@ -16,17 +16,14 @@ class Users extends React.Component<UsersPropsType> {
     }
 
     componentDidMount() {
-        
+         
         if(this.props.users.length === 0) {
-            axios.default.get("https://social-network.samuraijs.com/api/1.0/users?page=5")
+            axios.default.get("https://social-network.samuraijs.com/api/1.0/users?page=1&count=30")
             .then(response => {
                         this.props.setUsers(response.data.items)
                         
             })
         }
-    }
-    componentWillUnmount() {
-        
     }
 
 
