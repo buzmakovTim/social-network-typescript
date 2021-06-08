@@ -2,30 +2,52 @@ import * as axios from 'axios';
 import React from 'react';
 import { v1 } from 'uuid';
 import { UsersPropsType } from './UsersContainer';
+import style from './Users.module.css'
+import { throws } from 'node:assert';
 
-
-
+// Class component 
 class Users extends React.Component<UsersPropsType> {
 
 
     constructor(props: UsersPropsType) {
         super(props);
-        
-        
-        
     }
 
     componentDidMount() {
-         
+
         if(this.props.users.length === 0) {
-            axios.default.get("https://social-network.samuraijs.com/api/1.0/users?page=1&count=30")
+            // Server request
+            axios.default.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                         this.props.setUsers(response.data.items)
+                        this.props.setTotalUsersCount(response.data.totalCount)
                         
             })
         }
     }
 
+    onPageChanged = (pageNumber: number) => {
+
+
+        let pageToSet = 1
+          if(pageNumber < pageToSet){
+            pageToSet = 1
+          } else if(pageNumber > Math.ceil(this.props.totalUsersCont / this.props.pageSize)) {
+            pageToSet = Math.ceil(this.props.totalUsersCont / this.props.pageSize)
+          } else {
+            pageToSet = pageNumber
+          }
+        
+        if(this.props.currentPage !== pageToSet){
+            this.props.setUsers([])
+            this.props.setCurrentPage(pageToSet)
+            axios.default.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageToSet}&count=${this.props.pageSize}`)
+                .then(response => {
+                            this.props.setUsers(response.data.items)          
+                })
+        }
+        
+    }
 
 //    getUsers = () => 
 //    {
@@ -38,6 +60,14 @@ class Users extends React.Component<UsersPropsType> {
 //    }
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCont / this.props.pageSize);
+        
+        let pages = []
+        for(let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div>
                 {/* <button onClick={this.getUsers}>Get Users</button> */}
@@ -50,7 +80,20 @@ class Users extends React.Component<UsersPropsType> {
                 }
 
 
-
+            <div>
+                <span
+                    onClick={ () => {this.onPageChanged(this.props.currentPage - 1)}}  
+                    className={style.pageNumbers}>{ '<<' }</span>
+                {pages.map( p => {
+                    return <span 
+                        onClick={ () => {this.onPageChanged(p)}}
+                        className={this.props.currentPage === p ? style.selectedPage : style.pageNumbers}>{" "+ p+ " "}</span>    
+                })}
+                <span 
+                    onClick={ () => {this.onPageChanged(this.props.currentPage + 1)}}
+                    className={style.pageNumbers}>{ '>>' }</span>
+                
+            </div>
             </div>
         )
 
