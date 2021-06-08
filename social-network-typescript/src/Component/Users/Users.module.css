@@ -8,3 +8,20 @@
 .pageNumbers:hover {
     cursor: pointer;
 }
+.iconImage img {
+    max-width: 80px;
+    border-radius: 25px;
+}
+.name {
+    font-size: 1.3em;
+}
+.userBox {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.171);
+    margin-bottom: 30px;
+}
+.status {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    font-weight: normal;
+}

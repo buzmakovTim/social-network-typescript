@@ -9,6 +9,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 // Initial state for Dialog Page
 let initialState: InitialStateType = {
@@ -19,7 +20,8 @@ let initialState: InitialStateType = {
     ],
     pageSize:  100,
     totalUsersCont: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
   }
 
 // state: DialogsPageType = initialState 
@@ -42,7 +44,8 @@ export type InitialStateType = {
   users: UserType[]
   pageSize: number,
   totalUsersCont: number,
-  currentPage: number
+  currentPage: number,
+  isFetching: boolean
 }
 
 
@@ -92,6 +95,10 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
           return {...state, totalUsersCont: action.totalCount}
         }
         
+        case TOGGLE_IS_FETCHING: {
+          return {...state, isFetching: action.isFetching}
+        }
+        
         default: 
               return state
     }
@@ -128,6 +135,12 @@ export const setTotalUsersCountAC = (totalCount: number) => {
     return {
       type: SET_TOTAL_USERS_COUNT,
       totalCount: totalCount
+    } as const
+}
+export const setToggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+      type: TOGGLE_IS_FETCHING,
+      isFetching: isFetching
     } as const
 }
 //
