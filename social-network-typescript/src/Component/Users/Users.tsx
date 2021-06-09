@@ -5,56 +5,43 @@ import style from './Users.module.css'
 import { throws } from 'node:assert';
 import userIcon from '../../images/userIcon.png'
 import { UserType } from '../../redux/usersPage-reducer';
+import { NavLink } from 'react-router-dom';
+
 
 type PropsType = {
     users: UserType[]
-    totalUsersCont: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (newPage: number) => void
 }
 
 let Users = (props: PropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCont / props.pageSize);
-        
-    let pages = []
-    for(let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+
 
         return (
             <div>
-                {/* <button onClick={this.getUsers}>Get Users</button> */}
+           
                 {
                     props.users.map(u => <div key={u.id} className={style.userBox}>
 
                         <div className={style.iconImage}>
-                            <img src={(u.photos.small !== null) ? u.photos.small : userIcon} alt="" />
+                            <NavLink to={'/profile/'+u.id}>
+                                <img src={(u.photos.small !== null) ? u.photos.small : userIcon} alt="" />
+                            </NavLink>
+                            
                         </div>
                         {/* Name */}
                         <div className={style.name}>{u.name}</div>
-                        <div className={style.status}>{u.status}</div>
+                        {/* <div className={style.status}>{u.status} */}
+                        
+                        <div>
+                        <h6 className={style.status}>{u.status}</h6>
+                            </div>
+                        {/* </div> */}
 
                         
                     </div>)
                 }
             
-
-            <div>
-                <span
-                    onClick={ () => {props.onPageChanged(props.currentPage - 1)}}  
-                    className={style.pageNumbers}>{ '<<' }</span>
-                {pages.map( p => {
-                    return <span 
-                        onClick={ () => {props.onPageChanged(p)}}
-                        className={props.currentPage === p ? style.selectedPage : style.pageNumbers}>{" "+ p+ " "}</span>    
-                })}
-                <span 
-                    onClick={ () => {props.onPageChanged(props.currentPage + 1)}}
-                    className={style.pageNumbers}>{ '>>' }</span>
-                
-            </div>
+            
             </div>
         )
 

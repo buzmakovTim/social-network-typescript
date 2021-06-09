@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import {Dispatch} from 'redux'
 import { decodedTextSpanIntersectsWith } from 'typescript';
 import axios from 'axios';
-import preloader from '../../images/preloader.gif'
+import { Preloader } from '../Common/Preloader/Preloader';
+import style from './UsersContainer.module.css'
 
 
 
@@ -50,21 +51,81 @@ class UsersContainerComponent extends React.Component<UsersPropsType> {
         }
     }
 
+
+
+    pagination = () => {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCont / this.props.pageSize);
+        
+        let pages = []
+        for(let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+        }
+
+        return <>
+        <div className={style.pagination}>
+                <span
+                    onClick={ () => {this.onPageChanged(this.props.currentPage - 1)}}  
+                    className={style.pageNumbers}>{ '<<' }</span>
+                {pages.map( p => {
+
+                    if(p+3 === this.props.currentPage ||
+                        p+2 === this.props.currentPage ||
+                        p+1 === this.props.currentPage || 
+                        p-1 === this.props.currentPage ||
+                        p-2 === this.props.currentPage ||
+                        p-3 === this.props.currentPage || 
+                        p === this.props.currentPage){
+                        return <span 
+                        onClick={ () => {this.onPageChanged(p)}}
+                        className={this.props.currentPage === p ? style.selectedPage : style.pageNumbers}>{" "+ p+ " "}</span>    
+                    }if(p === pagesCount) {
+                        return <>
+                        <span>{". . ."}</span>
+                        <span 
+                        onClick={ () => {this.onPageChanged(p)}}
+                        className={this.props.currentPage === p ? style.selectedPage : style.pageNumbers}>{p}</span>
+                        </>
+                    }if(p === 1) {
+                        return <><span 
+                        onClick={ () => {this.onPageChanged(p)}}
+                        className={this.props.currentPage === p ? style.selectedPage : style.pageNumbers}>{p}</span>
+                        <span>{". . ."}</span>
+                        </>
+                    }
+                    
+                })}
+                <span 
+                    onClick={ () => {this.onPageChanged(this.props.currentPage + 1)}}
+                    className={style.pageNumbers}>{ '>>' }</span>    
+            </div>
+            </>
+            {/* Paging ends */}
+
+    }
+
     
     render() {
 
         return (
-            <>
-                {this.props.isFetching ? <img src={preloader}/> : null}
-
-                <Users users={this.props.users}
-                   totalUsersCont={this.props.totalUsersCont}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                    />
+            <div>
                 
-            </>
+            {/* Paging here */}
+            {this.pagination()}
+
+            <div className={style.usersBox}>
+                {this.props.isFetching ? <Preloader /> : null}
+
+                <Users users={this.props.users} />
+                
+            </div>
+
+            {/* Paging here */}
+            {this.pagination()}
+
+            </div>
+        
+            
         )
 
     }

@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 // // MyPosts Container component
 // // Taking the store
 
-// const MyPostsContainer: React.FC<MyPostsContainerPropsType> = ({ store }) => {
+const MyPostsContainer = () => {
 
 //   // Add Post call back Handler
 //   let addPostHandler = () => {
@@ -31,6 +31,12 @@ import {connect} from 'react-redux';
 //   }
 
 
+return (
+  <div>
+    
+  </div>
+)
+
 //   return (
 //       // Pure Component MyPosts
 //       // Nothing know about the store
@@ -39,12 +45,12 @@ import {connect} from 'react-redux';
 //                addPost={addPostHandler} 
 //                updateNewPostText={updateNewPostTextHandler}/>
 //       )
-// };
+}
 
 let mapsStateToProps = (state: AppStateType) => {
     return {
-      newPostText: state.profilePage.newPostText,
-      posts: state.profilePage.posts
+      newPostText: null,
+      posts: null
     }
 }
 
@@ -59,5 +65,5 @@ let mapsDispatchToProps = (dispatch: any) => {
   }
 }
 
-const MyPostsContainer = connect(mapsStateToProps, mapsDispatchToProps)(MyPosts);
+// const MyPostsContainer = connect(mapsStateToProps, mapsDispatchToProps)(MyPosts);
 export default MyPostsContainer;

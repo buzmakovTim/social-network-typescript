@@ -1,8 +1,6 @@
 import React from 'react';
 import c from './App.module.css';
 import Header from './Component/Header/Header';
-
-import ProfileContainer from './Component/Profile/ProfileContainer';
 import Footer from './Component/Footer/Footer';
 import Dialogs from './Component/Dialogs/Dialogs';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
@@ -13,6 +11,7 @@ import { ActionsType, RootStateType, StoreType } from './redux/state';
 import NavbarContainer from './Component/Navbar/NavbarContainer';
 
 import { UsersContainer } from './Component/Users/UsersContainer';
+import { ProfileContainer } from './Component/Profile/ProfileContainer';
 
 // import { UsersContainer } from './Component/Users/UsersContainer';
 

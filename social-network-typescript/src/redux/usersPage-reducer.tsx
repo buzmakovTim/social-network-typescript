@@ -13,11 +13,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 // Initial state for Dialog Page
 let initialState: InitialStateType = {
-    users : [
-            //{name: "Tim", id: 1, uniqueUrlName: '', photos: {small: '', large: ''}, status: 'Status', followed: true},
-            //{name: "Tim", id: 2, uniqueUrlName: '', photos: {small: '', large: ''}, status: 'Status', followed: true},
-            //{name: "Tim", id: 3, uniqueUrlName: '', photos: {small: '', large: ''}, status: 'Status', followed: true},
-    ],
+    users : [],
     pageSize:  100,
     totalUsersCont: 0,
     currentPage: 1,
@@ -27,17 +23,17 @@ let initialState: InitialStateType = {
 // state: DialogsPageType = initialState 
 // If state not provided we gonna use  initial value initialState
 export type PhotosType = {
-  small: string
-  large: string
+  small: string | null
+  large: string | null
 }
 
 export type UserType = {
-  name: string
+  name: string | null
   id: number
-  uniqueUrlName: string
+  uniqueUrlName: string | null
   photos: PhotosType
-  status: string,
-  followed: boolean 
+  status: string | null
+  followed: boolean
 }
 
 export type InitialStateType = {

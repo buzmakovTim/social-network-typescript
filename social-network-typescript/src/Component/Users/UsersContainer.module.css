@@ -1,0 +1,24 @@
+.usersBox {
+    min-height: 100vh;
+    min-width: 100%;
+    /* background-color: khaki; */
+}
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.pagination span {
+    margin: 5px;
+}
+.selectedPage {
+    font-weight: bold;
+}
+
+.selectedPage:hover {
+    cursor: pointer;
+}
+.pageNumbers:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.466);
+}

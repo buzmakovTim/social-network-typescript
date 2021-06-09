@@ -1,84 +1,70 @@
 import React from 'react';
 import { v1 } from 'uuid';
 import { ActionsType, PostsType, UserProfilePageType } from './state';
+import { PhotosType } from './usersPage-reducer';
 
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT'
+const SET_USER_PROFILE = 'SET_USER_PROFILE'
+
+
+export type ContactsType = {
+  facebook: string | null
+  website: string | null 
+  vk: string | null
+  twitter: string | null
+  instagram: string | null
+  youtube: string | null
+  github: string | null
+  mainLink: string | null
+}
+export type InitialStateType = {
+  profile: ProfileType | null
+}
+
+export type ProfileType = {
+  aboutMe: string | null
+  contacts: ContactsType[] | null
+  lookingForAJob: boolean
+  lookingForAJobDescription: string | null
+  fullName: string | null
+  userId: number | null
+  photos: PhotosType | null
+}
 
 // Initial state for Dialog Page
-let initialState = {
-    urlBackgroundImg:
-      'https://i0.wp.com/www.euroscientist.com/wp-content/uploads/2019/06/cropped-social-media-3846597_1280-1.png?resize=672%2C372&ssl=1',
-    userLoggedIn: {
-      id: v1(),
-      avatarUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-      firstName: 'Tim',
-      lastName: 'Buzmakov',
-    },
-    posts: [
-      {
-        user: {
-          id: v1(),
-          avatarUrl:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-          firstName: 'Vadik',
-          lastName: 'Huyadik',
-        },
-        postText: 'First post',
-        likes: 10,
-      },
-      {
-        user: {
-          id: v1(),
-          avatarUrl:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-          firstName: 'Kiril',
-          lastName: 'Goncharov',
-        },
-        postText: 'First post',
-        likes: 3,
-      },
-      {
-        user: {
-          id: v1(),
-          avatarUrl:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaSXz1HMREReqw-P0iHJZOA7mpnfPrSC_DdM2ruiFtlNvY_5K043wIzPcjow1UyTcfqU4&usqp=CAU',
-          firstName: 'Dima',
-          lastName: 'Drochilov',
-        },
-        postText: 'First post',
-        likes: 6,
-      },
-    ],
-    newPostText: '',
-  }
+let initialState: InitialStateType = {
+    profile: null
+    }
 
 // state: DialogsPageType = initialState 
 // If state not provided we gonna use  initial value initialState
 
 
-const profilePageReducer = (state: UserProfilePageType = initialState, action: ActionsType): UserProfilePageType => {
+const profilePageReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
     switch(action.type){
 
-        case ADD_POST: {
-          const stateCopy = {...state}
-          let newPost: PostsType = {
-              user: {...state.userLoggedIn},
-              //postText: action.postText,
-              postText: state.newPostText, 
-              likes: 0,
-            };
-            stateCopy.posts.push(newPost);
-            stateCopy.newPostText = '';
-          return stateCopy    
-        }
+        // case ADD_POST: {
+        //   const stateCopy = {...state}
+        //   let newPost: PostsType = {
+        //       user: {...state.userLoggedIn},
+        //       //postText: action.postText,
+        //       postText: state.newPostText, 
+        //       likes: 0,
+        //     };
+        //     stateCopy.posts.push(newPost);
+        //     stateCopy.newPostText = '';
+        //   return stateCopy    
+        // }
             
-        case CHANGE_NEW_POST_TEXT: {
-          const stateCopy = {...state}
-          stateCopy.newPostText = action.newText
-          return stateCopy
+        // case CHANGE_NEW_POST_TEXT: {
+        //   const stateCopy = {...state}
+        //   stateCopy.newPostText = action.newText
+        //   return stateCopy
+        // }
+        case SET_USER_PROFILE: {
+          return {...state, profile: action.profile}
         }
             
         
@@ -98,7 +84,13 @@ export const addPostAC = () => {
   export const changeNewTextActionTypeAC = (newText: string) => {
     return {
       type: CHANGE_NEW_POST_TEXT,
-      newText: newText
+      newText
+    } as const
+  }
+  export const setUserProfileAC = (profile: ProfileType) => {
+    return {
+      type: SET_USER_PROFILE,
+      profile
     } as const
   }
 //
