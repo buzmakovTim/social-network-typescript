@@ -24,7 +24,7 @@ export type InitialStateType = {
 
 export type ProfileType = {
   aboutMe: string | null
-  contacts: ContactsType[] | null
+  contacts: ContactsType | null
   lookingForAJob: boolean
   lookingForAJobDescription: string | null
   fullName: string | null

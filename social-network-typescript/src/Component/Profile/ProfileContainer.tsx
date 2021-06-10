@@ -10,12 +10,24 @@ import {Dispatch} from 'redux'
 import {connect} from 'react-redux';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import axios from 'axios';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Preloader } from '../Common/Preloader/Preloader';
+// import { withRouter } from 'react-router-dom';
 
 
-class ProfileContainerComponent extends React.Component<ProfileInfoType> {
+class ProfileContainerComponent extends React.Component<PropsType> {
 
   componentDidMount() {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+
+    // UserId we are getting from withRouter  Type PathParamsType 
+    let userId = this.props.match.params.userId;
+    
+    // For now we gonna hard code userId if not logged in yet
+    if(!userId) {
+      userId = '2'
+    }
+    
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
                         this.props.setUserProfile(response.data)
             })
@@ -33,6 +45,10 @@ class ProfileContainerComponent extends React.Component<ProfileInfoType> {
 }
 
 // Types
+type PathParamsType = {
+  userId: string
+}
+
 type MapStatePropsType = {
   profile: ProfileType | null
 }
@@ -52,9 +68,9 @@ let mapsDispatchProps = (dispatch: Dispatch): MapDispatchPropsType => {
     }
   }
 }
-export type ProfileInfoType = MapStatePropsType & MapDispatchPropsType
+type ProfileInfoType = MapStatePropsType & MapDispatchPropsType
 
-
+type PropsType = RouteComponentProps<PathParamsType> & ProfileInfoType
 // const Profile = () => {
 //   return (
 //     <div>
@@ -64,4 +80,6 @@ export type ProfileInfoType = MapStatePropsType & MapDispatchPropsType
 //   );
 // };
 
-export const ProfileContainer = connect(mapsStateProps, mapsDispatchProps)(ProfileContainerComponent)
+let  withUrlDataContainerComponent = withRouter(ProfileContainerComponent);
+
+export const ProfileContainer = connect(mapsStateProps, mapsDispatchProps)(withUrlDataContainerComponent)

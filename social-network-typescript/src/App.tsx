@@ -47,7 +47,8 @@ const App = () => {
           {/* <Route path="/dialogs" render={() => <DialogsContainer store={props.store}/>} /> */}
 
           {/* Profile */}
-          <Route path="/profile" render={() => <ProfileContainer />} />
+          {/* /profile/:userId?   :userId?  it's for withRouter */}
+          <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
 
           {/* Find Users */}
           <Route path="/users"  render={() => <UsersContainer />} />

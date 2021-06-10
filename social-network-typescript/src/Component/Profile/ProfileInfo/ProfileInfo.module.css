@@ -30,3 +30,13 @@ h2 {
 .links {
     margin: 40px 0 0 20px;
 }
+.links img {
+    width: 50px;
+    margin-right: 10px;
+    opacity: 100%;
+}
+.links img:hover {
+    width: 50px;
+    margin-right: 10px;
+    opacity: 80%;
+}
