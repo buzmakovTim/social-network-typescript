@@ -6,12 +6,14 @@ import profilePageReducer from './profilePage-reducer';
 import { StoreType } from './state';
 import thunkMiddleware from 'redux-thunk'
 import usersPageReducer from './usersPage-reducer';
+import authReducer from './auth-reducer';
 
 export const rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogPageReducer,
     friendsPageSideBar: friendsPageSideBarReducer,
-    usersPage: usersPageReducer
+    usersPage: usersPageReducer,
+    authorizing: authReducer,
 }) 
 
 

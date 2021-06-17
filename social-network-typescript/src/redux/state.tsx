@@ -1,5 +1,6 @@
 import { addSyntheticTrailingComment } from 'typescript';
 import { v1 } from 'uuid';
+import { setUserDataAC } from './auth-reducer';
 import dialogPageReducer, { sendMessageActionTypeAC, setUserIdForMessageAC, updateNewMessageTextActionTypeAC } from './dialogsPage-reducer';
 import profilePageReducer, { addPostAC, changeNewTextActionTypeAC, setUserProfileAC } from './profilePage-reducer';
 import { followAC, setCurrentPageAC, setToggleIsFetchingAC, setTotalUsersCountAC, setUsersAC, unfollowAC } from './usersPage-reducer';
@@ -101,7 +102,8 @@ export type ActionsType = ReturnType<typeof changeNewTextActionTypeAC> |
                           ReturnType<typeof setCurrentPageAC> |
                           ReturnType<typeof setTotalUsersCountAC> | 
                           ReturnType<typeof setToggleIsFetchingAC> |
-                          ReturnType<typeof setUserProfileAC>
+                          ReturnType<typeof setUserProfileAC> |
+                          ReturnType<typeof setUserDataAC> 
                            //| 
                           //ReturnType<typeof sendMessageActionTypeAC>
 

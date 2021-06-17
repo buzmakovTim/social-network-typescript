@@ -12,6 +12,7 @@ import NavbarContainer from './Component/Navbar/NavbarContainer';
 
 import { UsersContainer } from './Component/Users/UsersContainer';
 import { ProfileContainer } from './Component/Profile/ProfileContainer';
+import { HeaderContainer } from './Component/Header/HeaderContainer';
 
 // import { UsersContainer } from './Component/Users/UsersContainer';
 
@@ -31,10 +32,9 @@ import { ProfileContainer } from './Component/Profile/ProfileContainer';
 const App = () => {
 
   //const state = props.store.getState()
-
   return (
     <div>
-      <Header />
+      <HeaderContainer />
       <div className={c.appWrapper}>
 
           {/* Side bar navigation component */}
