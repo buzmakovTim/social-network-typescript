@@ -3,7 +3,7 @@ import { v1 } from 'uuid';
 import { setUserDataAC } from './auth-reducer';
 import dialogPageReducer, { sendMessageActionTypeAC, setUserIdForMessageAC, updateNewMessageTextActionTypeAC } from './dialogsPage-reducer';
 import profilePageReducer, { addPostAC, changeNewTextActionTypeAC, setUserProfileAC } from './profilePage-reducer';
-import { followAC, setCurrentPageAC, setToggleIsFetchingAC, setTotalUsersCountAC, setUsersAC, unfollowAC } from './usersPage-reducer';
+import { followAC, setCurrentPageAC, setToggleIsFetchingAC, setToggleIsFollowingProgressAC, setTotalUsersCountAC, setUsersAC, unfollowAC } from './usersPage-reducer';
 // import { rerenderEntireTree } from '../render';
 
 
@@ -103,7 +103,8 @@ export type ActionsType = ReturnType<typeof changeNewTextActionTypeAC> |
                           ReturnType<typeof setTotalUsersCountAC> | 
                           ReturnType<typeof setToggleIsFetchingAC> |
                           ReturnType<typeof setUserProfileAC> |
-                          ReturnType<typeof setUserDataAC> 
+                          ReturnType<typeof setUserDataAC> |
+                          ReturnType<typeof setToggleIsFollowingProgressAC>
                            //| 
                           //ReturnType<typeof sendMessageActionTypeAC>
 

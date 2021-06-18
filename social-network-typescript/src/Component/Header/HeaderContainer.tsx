@@ -5,6 +5,7 @@ import { AppStateType } from '../../redux/redux-store';
 import Header from './Header';
 import {Dispatch} from 'redux'
 import {connect} from 'react-redux';
+import { authorizedAPI } from '../../api/api';
 
 
 
@@ -12,23 +13,16 @@ import {connect} from 'react-redux';
 class HeaderContainerComponent extends React.Component<AuthorizeType>{
 
   
-  
-
   componentDidMount(){
-    
-    
-
-    axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-      withCredentials: true
-    })
-            .then(response => {
+    //If authorized Set userData
+    authorizedAPI.ifAuthorized().then(data => {
                         
-                  if(response.data.resultCode === 0) {
-                    let {id, login, email} = response.data.data;
+                  if(data.resultCode === 0) {
+                    let {id, login, email} = data.data;
                    this.props.setUserData(id, login, email)
                   }
             })
-  }
+    }
 
 
   render() {

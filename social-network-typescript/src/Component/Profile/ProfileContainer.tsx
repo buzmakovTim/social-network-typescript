@@ -12,6 +12,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import axios from 'axios';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Preloader } from '../Common/Preloader/Preloader';
+import { authorizedAPI, usersAPI } from '../../api/api';
 // import { withRouter } from 'react-router-dom';
 
 
@@ -20,17 +21,27 @@ class ProfileContainerComponent extends React.Component<PropsType> {
   componentDidMount() {
 
     // UserId we are getting from withRouter  Type PathParamsType 
-    let userId = this.props.match.params.userId;
+    let userId = Number(this.props.match.params.userId);
     
-    // For now we gonna hard code userId if not logged in yet
+    
+    // By default we gonna show profile who is login
     if(!userId) {
-      userId = '2'
+      
+      // If I'm authorized, show my profile, otherwise PRELOADER gonna run none stop!!! NEEDS TO BE FIXED!
+      authorizedAPI.ifAuthorized().then(data => {
+          usersAPI.getUser(data.data.id).then(profile => {
+            this.props.setUserProfile(profile)
+          })    
+      })
+    } else {
+
+        //Show profile that we clicked on
+        usersAPI.getUser(userId).then(data => {
+          this.props.setUserProfile(data)
+        })
     }
     
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                        this.props.setUserProfile(response.data)
-            })
+    
     
   }
 

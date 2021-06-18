@@ -4,12 +4,13 @@ import { v1 } from 'uuid';
 import { ActionsType } from './state';
 
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 // Initial state for Dialog Page
 let initialState: InitialStateType = {
@@ -17,7 +18,8 @@ let initialState: InitialStateType = {
     pageSize:  100,
     totalUsersCont: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false,
   }
 
 // state: DialogsPageType = initialState 
@@ -41,7 +43,8 @@ export type InitialStateType = {
   pageSize: number,
   totalUsersCont: number,
   currentPage: number,
-  isFetching: boolean
+  isFetching: boolean,
+  followingInProgress: boolean,
 }
 
 
@@ -94,6 +97,10 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
         case TOGGLE_IS_FETCHING: {
           return {...state, isFetching: action.isFetching}
         }
+
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+          return {...state, followingInProgress: action.followingInProgress}
+        }
         
         default: 
               return state
@@ -138,6 +145,12 @@ export const setToggleIsFetchingAC = (isFetching: boolean) => {
       type: TOGGLE_IS_FETCHING,
       isFetching: isFetching
     } as const
+}
+export const setToggleIsFollowingProgressAC = (followingInProgress: boolean) => {
+  return {
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    followingInProgress: followingInProgress
+  } as const
 }
 //
 // Action Creators End
