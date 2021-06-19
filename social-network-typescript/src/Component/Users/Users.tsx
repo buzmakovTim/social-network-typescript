@@ -60,6 +60,7 @@ let Users = (props: PropsType) => {
                             <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => {
                                               
                                 //Server request FOLLOW
+                                //
                                 props.follow(u.id)    
                             }} 
                                 >Follow</button>}
