@@ -1,9 +1,9 @@
 import { addSyntheticTrailingComment } from 'typescript';
 import { v1 } from 'uuid';
-import { setUserDataAC } from './auth-reducer';
+import { setUserData } from './auth-reducer';
 import dialogPageReducer, { sendMessageActionTypeAC, setUserIdForMessageAC, updateNewMessageTextActionTypeAC } from './dialogsPage-reducer';
 import profilePageReducer, { addPostAC, changeNewTextActionTypeAC, setUserProfileAC } from './profilePage-reducer';
-import { followAC, setCurrentPageAC, setToggleIsFetchingAC, setToggleIsFollowingProgressAC, setTotalUsersCountAC, setUsersAC, unfollowAC } from './usersPage-reducer';
+import { follow, setCurrentPage, setToggleIsFetching, setToggleIsFollowingProgress, setTotalUsersCount, setUsers, unfollow } from './usersPage-reducer';
 // import { rerenderEntireTree } from '../render';
 
 
@@ -96,15 +96,15 @@ export type ActionsType = ReturnType<typeof changeNewTextActionTypeAC> |
                           ReturnType<typeof updateNewMessageTextActionTypeAC> |
                           ReturnType<typeof sendMessageActionTypeAC> |
                           ReturnType<typeof setUserIdForMessageAC> |
-                          ReturnType<typeof followAC> |
-                          ReturnType<typeof unfollowAC> |
-                          ReturnType<typeof setUsersAC> |
-                          ReturnType<typeof setCurrentPageAC> |
-                          ReturnType<typeof setTotalUsersCountAC> | 
-                          ReturnType<typeof setToggleIsFetchingAC> |
+                          ReturnType<typeof follow> |
+                          ReturnType<typeof unfollow> |
+                          ReturnType<typeof setUsers> |
+                          ReturnType<typeof setCurrentPage> |
+                          ReturnType<typeof setTotalUsersCount> | 
+                          ReturnType<typeof setToggleIsFetching> |
                           ReturnType<typeof setUserProfileAC> |
-                          ReturnType<typeof setUserDataAC> |
-                          ReturnType<typeof setToggleIsFollowingProgressAC>
+                          ReturnType<typeof setUserData> |
+                          ReturnType<typeof setToggleIsFollowingProgress>
                            //| 
                           //ReturnType<typeof sendMessageActionTypeAC>
 

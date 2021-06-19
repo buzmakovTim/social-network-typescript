@@ -1,18 +1,18 @@
 import axios from 'axios';
 import React from 'react';
-import { setUserDataAC } from '../../redux/auth-reducer';
 import { AppStateType } from '../../redux/redux-store';
 import Header from './Header';
 import {Dispatch} from 'redux'
 import {connect} from 'react-redux';
 import { authorizedAPI } from '../../api/api';
+import { setUserData } from '../../redux/auth-reducer';
 
 
 
 
 class HeaderContainerComponent extends React.Component<AuthorizeType>{
 
-  
+
   componentDidMount(){
     //If authorized Set userData
     authorizedAPI.ifAuthorized().then(data => {
@@ -56,7 +56,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 const mapsDispatchProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   return {
     setUserData: (id: number, login: string, email: string) =>{
-      dispatch(setUserDataAC(id, login, email))
+      dispatch(setUserData(id, login, email))
     }
   }
 }

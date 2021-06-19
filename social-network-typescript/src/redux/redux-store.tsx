@@ -20,4 +20,10 @@ export const rootReducer = combineReducers({
 export type RootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<RootReducerType>
 
-export const store = createStore(rootReducer);
+
+
+// For thunks applyMiddleware()
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+//@ts-ignore
+window.store = store;

@@ -23,12 +23,14 @@ let initialState: InitialStateType = {
 
 const authReducer = (state: InitialStateType = initialState, action: ActionsType):  InitialStateType => {
     
-    
+    //@ts-ignore
     switch(action.type){
         
+      
         case SET_USER_DATA:     
         return {
             ...state,
+            //@ts-ignore
             ...action.data,
             isAuth: true
           
@@ -42,7 +44,7 @@ const authReducer = (state: InitialStateType = initialState, action: ActionsType
 //
 // Action Creators Start
 //
-export const setUserDataAC = (id: number, login: string, email: string) => {
+export const setUserData = (id: number, login: string, email: string) => {
     return {
       type: SET_USER_DATA,
       data: {

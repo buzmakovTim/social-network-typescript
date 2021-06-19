@@ -38,14 +38,10 @@ export const usersAPI = {
         .then(response =>{
             return response.data
         })
-    }
-
-}
+    },
 
 
-// Follow Unfollow
-export const followUnfollowAPI = {
-
+    // Folow Unfollow
     follow(userId: number){
         //returning promise
         return instance.post(`follow/${userId}`)
@@ -62,5 +58,26 @@ export const followUnfollowAPI = {
         });    
     },
 }
+
+
+// // Follow Unfollow
+// export const followUnfollowAPI = {
+
+//     follow(userId: number){
+//         //returning promise
+//         return instance.post(`follow/${userId}`)
+//         .then(response => {
+//             return response.data;
+//         });    
+//     },  
+
+//     unfollow(userId: number){
+//         //returning promise
+//         return instance.delete(`follow/${userId}`)
+//         .then(response => {
+//             return response.data;
+//         });    
+//     },
+// }
 
 

@@ -43,6 +43,7 @@ let initialState: InitialStateType = {
 
 const profilePageReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
+    //@ts-ignore
     switch(action.type){
 
         // case ADD_POST: {
@@ -64,6 +65,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
         //   return stateCopy
         // }
         case SET_USER_PROFILE: {
+          //@ts-ignore
           return {...state, profile: action.profile}
         }
             

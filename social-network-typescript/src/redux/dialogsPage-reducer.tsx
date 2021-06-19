@@ -58,12 +58,13 @@ let initialState = {
 
 const dialogPageReducer = (state: DialogsPageType = initialState, action: ActionsType):  DialogsPageType => {
     
-    
+    //@ts-ignore
     switch(action.type){
 
         case UPDATE_NEW_MESSAGE_TEXT: {
           
           const stateCopy = {...state}
+          //@ts-ignore
           stateCopy.newMessageText = action.newText
           return stateCopy
         }
@@ -71,7 +72,9 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
 
         case SEND_MESSAGE: {
           
+          //@ts-ignore
           const messageToSend = state.newMessageText
+          //@ts-ignore
           const userIdSendTo = action.sendToUserId
           
           let user = state.users.find( u => u.id === userIdSendTo)
@@ -90,6 +93,7 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
         case SET_USER_ID_FOR_MESSAGE: {
           
           const stateCopy = {...state}
+          //@ts-ignore
           stateCopy.userId = action.userId
             
           return stateCopy

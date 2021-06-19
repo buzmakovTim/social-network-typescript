@@ -6,15 +6,16 @@ import { throws } from 'node:assert';
 import userIcon from '../../images/userIcon.png'
 import { UserType } from '../../redux/usersPage-reducer';
 import { NavLink } from 'react-router-dom';
-import { followUnfollowAPI } from '../../api/api';
+import { usersAPI } from '../../api/api';
+
 
 
 type PropsType = {
     users: UserType[];
     follow: (userId: number) => void;
     unfollow: (userId: number) => void;
-    toggleIsFolowingProgress: (followingInProgress: boolean) => void;
-    followingInProgress: boolean;
+    //toggleIsFolowingProgress: (followingInProgress: boolean, id: number) => void;
+    followingInProgress: number[];
 }
 
 let Users = (props: PropsType) => {
@@ -46,28 +47,21 @@ let Users = (props: PropsType) => {
                             {/* Buttons FOLLOW UNFOLLOW  start*/}
                             {u.followed ? 
                             
-                            <button disabled={props.followingInProgress} onClick={ () => {
-                                //Server request FOLLOW
-                                props.toggleIsFolowingProgress(true) // Following in Progress START
-                                followUnfollowAPI.unfollow(u.id).then(data => {
-                                    
-                                    if(data.resultCode === 0){
-                                        props.unfollow(u.id)
-                                    }
-                                    props.toggleIsFolowingProgress(false) // Following in Progress STOP
-                                })}} 
-                                >Unfollow</button> : 
-                                          
-                            <button disabled={props.followingInProgress} onClick={ () => {
-                                              
+                            // Disabling button while following in progress
+                            // 
+                            <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => {
                                 //Server request UNFOLLOW
-                                props.toggleIsFolowingProgress(true) // Following in Progress START             
-                                followUnfollowAPI.follow(u.id).then(data => {
-                                    if(data.resultCode === 0){
-                                        props.follow(u.id)
-                                    }
-                                    props.toggleIsFolowingProgress(false) // Following in Progress STOP    
-                                })}} 
+                                props.unfollow(u.id)
+                                }
+                            } 
+                                >Unfollow</button> : 
+                            
+                            // Disabling button while following in progress
+                            <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={ () => {
+                                              
+                                //Server request FOLLOW
+                                props.follow(u.id)    
+                            }} 
                                 >Follow</button>}
                             {/* Buttons FOLLOW UNFOLLOW  end*/}
 

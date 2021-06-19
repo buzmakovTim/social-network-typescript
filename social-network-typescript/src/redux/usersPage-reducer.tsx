@@ -1,6 +1,7 @@
 import React from 'react';
 import { addSyntheticTrailingComment, FlowLabel, isTemplateLiteralTypeSpan } from 'typescript';
 import { v1 } from 'uuid';
+import { usersAPI } from '../api/api';
 import { ActionsType } from './state';
 
 
@@ -19,7 +20,7 @@ let initialState: InitialStateType = {
     totalUsersCont: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false,
+    followingInProgress: [],
   }
 
 // state: DialogsPageType = initialState 
@@ -44,17 +45,19 @@ export type InitialStateType = {
   totalUsersCont: number,
   currentPage: number,
   isFetching: boolean,
-  followingInProgress: boolean,
+  followingInProgress: number[],
 }
 
 
 const usersPageReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
+    //@ts-ignore
     switch(action.type){
 
         case FOLLOW: {
           let stateCopy = {...state, 
                           users: state.users.map( u => {
+                            //@ts-ignore
                             if(u.id === action.userId) {
                               return {...u, followed: true}
                             }
@@ -67,6 +70,7 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
         case UNFOLLOW: {
           let stateCopy = {...state, 
                           users: state.users.map( u => {
+                            //@ts-ignore
                             if(u.id === action.userID) {
                               return {...u, followed: false}
                             }
@@ -80,26 +84,37 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
 
           // Users will add to the array
           //let stateCopy = {...state, users: [ ...state.users, ...action.users ]}
-
+//@ts-ignore
           let stateCopy = {...state, users: [...action.users]}
           return stateCopy
         }
 
         case SET_CURRENT_PAGE: {
-
+//@ts-ignore
           return {...state, currentPage: action.currentPage}
         }
 
         case SET_TOTAL_USERS_COUNT: {
+          //@ts-ignore
           return {...state, totalUsersCont: action.totalCount}
         }
         
         case TOGGLE_IS_FETCHING: {
+          //@ts-ignore
           return {...state, isFetching: action.isFetching}
         }
 
+        // For disabling button while 
         case TOGGLE_IS_FOLLOWING_PROGRESS: {
-          return {...state, followingInProgress: action.followingInProgress}
+          return {
+                ...state, 
+                //@ts-ignore
+                followingInProgress: action.isFetching
+                //@ts-ignore
+                ? [...state.followingInProgress, action.id]
+                //@ts-ignore
+                : state.followingInProgress.filter(id => id != action.id)
+          }
         }
         
         default: 
@@ -110,50 +125,102 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
 //
 // Action Creators Start
 //
-export const followAC = (userId: number) => {
+export const followSuccess = (userId: number) => {
     return { 
         type: FOLLOW,
         userId: userId
     } as const
   }
-export const unfollowAC = (userId: number) => {
+export const unfollowSuccess = (userId: number) => {
     return {
       type: UNFOLLOW,
       userID: userId
     } as const
   }
-export const setUsersAC = (users: UserType[]) => {
+export const setUsers = (users: UserType[]) => {
     return {
       type: SET_USERS,
       users: users
     } as const
 }
-export const setCurrentPageAC = (pageSelected: number) => {
+export const setCurrentPage = (pageSelected: number) => {
     return {
       type: SET_CURRENT_PAGE,
       currentPage: pageSelected
     } as const
 }
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {
       type: SET_TOTAL_USERS_COUNT,
       totalCount: totalCount
     } as const
 }
-export const setToggleIsFetchingAC = (isFetching: boolean) => {
+export const setToggleIsFetching = (isFetching: boolean) => {
     return {
       type: TOGGLE_IS_FETCHING,
       isFetching: isFetching
     } as const
 }
-export const setToggleIsFollowingProgressAC = (followingInProgress: boolean) => {
+export const setToggleIsFollowingProgress = (isFetching: boolean, id: number) => {
   return {
     type: TOGGLE_IS_FOLLOWING_PROGRESS,
-    followingInProgress: followingInProgress
+    isFetching: isFetching,
+    id: id,
   } as const
 }
 //
 // Action Creators End
 //
+
+
+// Thunks Start...
+// Get Users
+export const getUsers = (currentPage: number, pageSize: number) => {
+
+  return (dispatch: any) => {
+  
+    dispatch(setToggleIsFetching(true));
+              // Server request Getting Users
+              usersAPI.getUsers(currentPage, pageSize).then(data => {
+                          
+                          dispatch(setToggleIsFetching(false));
+                          dispatch(setUsers(data.items));
+                          dispatch(setTotalUsersCount(data.totalCount));
+              })
+  } 
+}
+
+export const unfollow = (id: number) => {
+
+  return(dispatch: any) => {
+
+    dispatch(setToggleIsFollowingProgress(true, id)) // Following in Progress START
+              
+              usersAPI.unfollow(id).then(data => {
+                  
+                  if(data.resultCode === 0){
+                      dispatch(unfollowSuccess(id))
+                  }
+    dispatch(setToggleIsFollowingProgress(false, id)) // Following in Progress STOP
+              })
+  }
+}
+
+export const follow = (id: number) => {
+
+  return(dispatch: any) => {
+
+    dispatch(setToggleIsFollowingProgress(true, id)) // Following in Progress START
+              
+              usersAPI.follow(id).then(data => {
+                  
+                  if(data.resultCode === 0){
+                      dispatch(followSuccess(id))
+                  }
+    dispatch(setToggleIsFollowingProgress(false, id)) // Following in Progress STOP
+              })
+  }
+}
+//Thunks End
 
 export default usersPageReducer;
