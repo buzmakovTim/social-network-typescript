@@ -1,5 +1,6 @@
 import React from 'react';
 import { v1 } from 'uuid';
+import { usersAPI } from '../api/api';
 import { ActionsType, PostsType, UserProfilePageType } from './state';
 import { PhotosType } from './usersPage-reducer';
 
@@ -98,5 +99,13 @@ export const addPostAC = () => {
 //
 // Action Creators End
 //
+
+//Thunks Start
+export const getUserProfile = (id: number) => (dispatch: any) => {
+    usersAPI.getProfile(id).then(response_Profile => {
+      dispatch(setUserProfileAC(response_Profile))
+    })
+}
+
 
 export default profilePageReducer;

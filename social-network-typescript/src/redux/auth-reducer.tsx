@@ -1,4 +1,5 @@
 import React from 'react';
+import { authAPI, usersAPI } from '../api/api';
 import { ActionsType } from './state';
 
 const SET_USER_DATA = 'SET_USER_DATA'
@@ -13,7 +14,7 @@ export type InitialStateType = {
 // Initial state for Dialog Page
 let initialState: InitialStateType = {
     id: null,
-    login: null,
+    login: null, 
     email: null,
     isAuth: false
   }
@@ -56,6 +57,20 @@ export const setUserData = (id: number, login: string, email: string) => {
   }
 //
 // Action Creators End
+//
+//
+// Thunks
+//
+export const getAuthUserData = () => (dispatch: any) => 
+    authAPI.me()
+        .then(data => {
+          if(data.resultCode === 0) {
+            let {id, login, email} = data.data;
+            dispatch(setUserData(id, login, email))
+          }
+        })
+//
+// Thunks
 //
 
 

@@ -10,9 +10,9 @@ const instance = axios.create({
 })
 
 //Is authorized
-export const authorizedAPI = {
+export const authAPI = {
     
-    ifAuthorized(){
+    me(){
         return instance.get(`/auth/me`)
         .then(response => {
             return response.data;
@@ -32,7 +32,7 @@ export const usersAPI = {
         });
     },
 
-    getUser(userId: number){
+    getProfile(userId: number){
         //returning promise
         return instance.get(`profile/${userId}`)
         .then(response =>{
@@ -57,6 +57,8 @@ export const usersAPI = {
             return response.data;
         });    
     },
+
+
 }
 
 

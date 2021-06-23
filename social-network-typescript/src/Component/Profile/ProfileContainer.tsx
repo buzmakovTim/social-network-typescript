@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileType, setUserProfileAC } from '../../redux/profilePage-reducer';
+import { getUserProfile, ProfileType } from '../../redux/profilePage-reducer';
 import { AppStateType } from '../../redux/redux-store';
 import { ActionsType, StoreType, UserType } from '../../redux/state';
 import MyPosts from './MyPosts/MyPosts';
@@ -12,37 +12,34 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import axios from 'axios';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Preloader } from '../Common/Preloader/Preloader';
-import { authorizedAPI, usersAPI } from '../../api/api';
-// import { withRouter } from 'react-router-dom';
+import { authAPI, usersAPI } from '../../api/api';
 
 
 class ProfileContainerComponent extends React.Component<PropsType> {
 
-  componentDidMount() {
 
+  componentDidMount() {
+    
+    authAPI.me().then(data => {
+      this.props.getUserProfile(data.data.id)
+      })  
+    
+  }
+
+  componentDidUpdate() {
     // UserId we are getting from withRouter  Type PathParamsType 
     let userId = Number(this.props.match.params.userId);
     
-    
     // By default we gonna show profile who is login
     if(!userId) {
-      
       // If I'm authorized, show my profile, otherwise PRELOADER gonna run none stop!!! NEEDS TO BE FIXED!
-      authorizedAPI.ifAuthorized().then(data => {
-          usersAPI.getUser(data.data.id).then(profile => {
-            this.props.setUserProfile(profile)
+      authAPI.me().then(data => {
+          this.props.getUserProfile(data.data.id)
           })    
-      })
     } else {
-
         //Show profile that we clicked on
-        usersAPI.getUser(userId).then(data => {
-          this.props.setUserProfile(data)
-        })
+        this.props.getUserProfile(userId)
     }
-    
-    
-    
   }
 
   // Render
@@ -63,22 +60,22 @@ type PathParamsType = {
 type MapStatePropsType = {
   profile: ProfileType | null
 }
-type MapDispatchPropsType = {
-  setUserProfile: (profile: ProfileType) => void
-}
+ type MapDispatchPropsType = {
+  getUserProfile: (id: number) => void
+ }
 
 let mapsStateProps = (state: AppStateType): MapStatePropsType => {
   return {
     profile: state.profilePage.profile
   }
 }
-let mapsDispatchProps = (dispatch: Dispatch): MapDispatchPropsType => {
-  return {
-    setUserProfile: (profile: ProfileType) => {
-      dispatch(setUserProfileAC(profile))
-    }
-  }
-}
+// let mapsDispatchProps = (dispatch: Dispatch): MapDispatchPropsType => {
+//   return {
+//     setUserProfile: (profile: ProfileType) => {
+//       dispatch(setUserProfileAC(profile))
+//     }
+//   }
+// }
 type ProfileInfoType = MapStatePropsType & MapDispatchPropsType
 
 type PropsType = RouteComponentProps<PathParamsType> & ProfileInfoType
@@ -93,4 +90,6 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileInfoType
 
 let  withUrlDataContainerComponent = withRouter(ProfileContainerComponent);
 
-export const ProfileContainer = connect(mapsStateProps, mapsDispatchProps)(withUrlDataContainerComponent)
+export const ProfileContainer = connect(mapsStateProps, 
+                                            {getUserProfile} // thunk
+                                            )(withUrlDataContainerComponent)
