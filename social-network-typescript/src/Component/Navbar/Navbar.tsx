@@ -1,7 +1,7 @@
 import React from 'react';
 import c from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
-import { UserType } from '../../redux/state';
+import { UserType } from '../../types/types';
 import { FriendsSideBar } from './FriendsSideBar/FriendsSideBar';
 import { v1 } from 'uuid';
 

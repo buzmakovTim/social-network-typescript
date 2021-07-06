@@ -2,12 +2,12 @@ import React, { ChangeEvent, TextareaHTMLAttributes, useRef } from 'react';
 import { v1 } from 'uuid';
 import { addPostAC, changeNewTextActionTypeAC } from '../../../redux/profilePage-reducer';
 import { AppStateType } from '../../../redux/redux-store';
-import { ActionsType, StoreType } from '../../../redux/state';
-import MyPosts from './MyPosts';
-import c from './MyPosts.module.css';
-import Post from './Post/Post';
-import { PostPropsType } from './Post/Post';
-import {connect} from 'react-redux';
+
+// import MyPosts from './MyPosts';
+// import c from './MyPosts.module.css';
+// import Post from './Post/Post';
+// import { PostPropsType } from './Post/Post';
+// import {connect} from 'react-redux';
 
 
 // type MyPostsContainerPropsType = {

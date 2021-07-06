@@ -1,7 +1,5 @@
 import React, { ChangeEvent, TextareaHTMLAttributes, useRef } from 'react';
 import { v1 } from 'uuid';
-import { addPostAC, changeNewTextActionTypeAC } from '../../../redux/profilePage-reducer';
-import { ActionsType } from '../../../redux/state';
 import c from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostPropsType } from './Post/Post';

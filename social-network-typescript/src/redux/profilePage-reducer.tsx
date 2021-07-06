@@ -1,7 +1,8 @@
 import React from 'react';
 import { v1 } from 'uuid';
 import { usersAPI } from '../api/api';
-import { ActionsType, PostsType, UserProfilePageType } from './state';
+import { ActionsType } from '../types/types';
+// import { ActionsType, PostsType, UserProfilePageType } from './state';
 import { PhotosType } from './usersPage-reducer';
 
 const ADD_POST = 'ADD-POST'
@@ -44,7 +45,7 @@ let initialState: InitialStateType = {
 
 const profilePageReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
-    //@ts-ignore
+    
     switch(action.type){
 
         // case ADD_POST: {
@@ -66,7 +67,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
         //   return stateCopy
         // }
         case SET_USER_PROFILE: {
-          //@ts-ignore
+          
           return {...state, profile: action.profile}
         }
             
@@ -81,7 +82,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
 //
 export const addPostAC = () => {
     return { 
-        type: ADD_POST
+      type: ADD_POST
     } as const
   }
   export const changeNewTextActionTypeAC = (newText: string) => {

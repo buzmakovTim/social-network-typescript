@@ -1,15 +1,15 @@
 import React from 'react';
 import { getUserProfile, ProfileType } from '../../redux/profilePage-reducer';
 import { AppStateType } from '../../redux/redux-store';
-import { ActionsType, StoreType, UserType } from '../../redux/state';
-import MyPosts from './MyPosts/MyPosts';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-import { PostPropsType } from './MyPosts/Post/Post';
+// import { ActionsType, StoreType, UserType } from '../../redux/state';
+// import MyPosts from './MyPosts/MyPosts';
+// import MyPostsContainer from './MyPosts/MyPostsContainer';
+// import { PostPropsType } from './MyPosts/Post/Post';
 import c from './Profile.module.css';
 import {Dispatch} from 'redux'
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import axios from 'axios';
+// import axios from 'axios';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Preloader } from '../Common/Preloader/Preloader';
 import { authAPI, usersAPI } from '../../api/api';
@@ -17,9 +17,10 @@ import { authAPI, usersAPI } from '../../api/api';
 
 class ProfileContainerComponent extends React.Component<PropsType> {
 
+  
 
   componentDidMount() {
-    
+ 
     authAPI.me().then(data => {
       this.props.getUserProfile(data.data.id)
       })  
@@ -44,6 +45,7 @@ class ProfileContainerComponent extends React.Component<PropsType> {
 
   // Render
   render() {
+    
     return (
       <div>
          <ProfileInfo profile={this.props.profile}/>

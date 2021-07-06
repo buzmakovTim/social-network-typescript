@@ -1,6 +1,9 @@
 import React from 'react';
 import { authAPI, usersAPI } from '../api/api';
-import { ActionsType } from './state';
+// import { ActionsType } from './state';
+import {Dispatch} from 'redux';
+import { ActionsType } from '../types/types';
+// import { ActionsType } from './redux-store';
 
 const SET_USER_DATA = 'SET_USER_DATA'
 
@@ -24,14 +27,14 @@ let initialState: InitialStateType = {
 
 const authReducer = (state: InitialStateType = initialState, action: ActionsType):  InitialStateType => {
     
-    //@ts-ignore
+    
     switch(action.type){
         
       
         case SET_USER_DATA:     
         return {
             ...state,
-            //@ts-ignore
+            
             ...action.data,
             isAuth: true
           
@@ -53,7 +56,7 @@ export const setUserData = (id: number, login: string, email: string) => {
           login,
           email,
       }
-    } as const
+    } as const;
   }
 //
 // Action Creators End
@@ -61,7 +64,7 @@ export const setUserData = (id: number, login: string, email: string) => {
 //
 // Thunks
 //
-export const getAuthUserData = () => (dispatch: any) => 
+export const getAuthUserData = () => (dispatch: Dispatch) => 
     authAPI.me()
         .then(data => {
           if(data.resultCode === 0) {

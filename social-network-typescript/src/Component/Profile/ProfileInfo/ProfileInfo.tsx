@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProfileType } from '../../../redux/profilePage-reducer';
-import { UserType } from '../../../redux/state';
+import { UserType } from '../../../types/types'
 import { Preloader } from '../../Common/Preloader/Preloader';
 import c from './ProfileInfo.module.css';
 import userIcon from '../../../images/userIcon.png'
@@ -13,6 +13,9 @@ import instagram from '../../../images/instagram.png'
 import twitter from '../../../images/twitter.png'
 import vk from '../../../images/vk.png'
 import youtube from '../../../images/youtube.png'
+import { useSelector } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
+import { Redirect } from 'react-router-dom';
 
 type ProfileInfoPropsType = {
   profile: ProfileType | null;
@@ -20,10 +23,19 @@ type ProfileInfoPropsType = {
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
   
+  let isAuth = useSelector<AppStateType, boolean>( state => state.authorizing.isAuth)
+
   if(!props.profile) {
+   
+    // If not Logged in redirect to Login page
+    if(!isAuth) return <Redirect to={'/login'} />
     return <Preloader />
   }
   
+  
+  
+
+
   return (
     <div className={c.profileInfo}>
       

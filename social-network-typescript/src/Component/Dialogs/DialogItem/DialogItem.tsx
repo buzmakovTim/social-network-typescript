@@ -1,9 +1,10 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { setUserIdForMessageAC } from '../../../redux/dialogsPage-reducer';
-import { ActionsType, UserType } from '../../../redux/state';
+import { UserType } from '../../../types/types';
 import c from './DialogItem.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
 
 //Props Type for Dialog Item
 export type DialogItemPropsType = {
@@ -13,7 +14,11 @@ export type DialogItemPropsType = {
 // Creating component DialogItem
 const DialogItem = (props: DialogItemPropsType) => {
   
+  const isAuth = useSelector<AppStateType, boolean>( state => state.authorizing.isAuth)
   const dispatch = useDispatch();
+
+
+
 
   let path = '/dialogs/' + props.user.id;
   
@@ -26,7 +31,12 @@ const DialogItem = (props: DialogItemPropsType) => {
     //props.dispatch(setUserIdForMessage(props.user.id))
   };
 
+
+  // If not Logged in redirect to Login page 
+  if(!isAuth) return <Redirect to={'/login'} />
+
   return (
+    
     <NavLink onClick={userIDcallBack} to={path} activeClassName={c.activeLink}>
       <div className={c.dialog}>
         <div className={c.avatar}>

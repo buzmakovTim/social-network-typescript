@@ -4,7 +4,7 @@ import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import { isPropertyAssignment, ListFormat } from 'typescript';
 import DialogItem, { DialogItemPropsType } from './DialogItem/DialogItem';
 import Message, { MessagePropsType } from './Message/Message';
-import { ActionsType, MessageType, UserType } from '../../redux/state';
+import { MessageType, UserType } from '../../types/types';
 import { v1 } from 'uuid';
 import { sendMessageActionTypeAC, updateNewMessageTextActionTypeAC } from '../../redux/dialogsPage-reducer';
 import { useDispatch, useSelector } from 'react-redux';

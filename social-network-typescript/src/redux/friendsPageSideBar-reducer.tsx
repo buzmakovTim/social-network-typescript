@@ -1,6 +1,6 @@
 import React from 'react';
 import { v1 } from 'uuid';
-import { ActionsType, UserType } from './state';
+import { ActionsType, UserType } from '../types/types';
 
 let initialState = [
     {

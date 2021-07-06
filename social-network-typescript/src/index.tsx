@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 // import store from './redux/redux-store';
-import { RootStateType } from './redux/state';
+// import { RootStateType } from './redux/state';
 import {Provider} from 'react-redux'
 import { store } from './redux/redux-store';
 

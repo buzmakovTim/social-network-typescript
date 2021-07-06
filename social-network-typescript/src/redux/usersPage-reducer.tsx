@@ -1,8 +1,10 @@
 import React from 'react';
-import { addSyntheticTrailingComment, FlowLabel, isTemplateLiteralTypeSpan } from 'typescript';
+// import { addSyntheticTrailingComment, FlowLabel, isTemplateLiteralTypeSpan } from 'typescript';
 import { v1 } from 'uuid';
 import { usersAPI } from '../api/api';
-import { ActionsType } from './state';
+import { ActionsType } from '../types/types';
+import { Dispatch } from 'redux'; 
+
 
 
 const FOLLOW = 'FOLLOW';
@@ -51,13 +53,13 @@ export type InitialStateType = {
 
 const usersPageReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
-    //@ts-ignore
+    
     switch(action.type){
 
         case FOLLOW: {
           let stateCopy = {...state, 
                           users: state.users.map( u => {
-                            //@ts-ignore
+                            
                             if(u.id === action.userId) {
                               return {...u, followed: true}
                             }
@@ -70,7 +72,7 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
         case UNFOLLOW: {
           let stateCopy = {...state, 
                           users: state.users.map( u => {
-                            //@ts-ignore
+                            
                             if(u.id === action.userID) {
                               return {...u, followed: false}
                             }
@@ -84,23 +86,23 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
 
           // Users will add to the array
           //let stateCopy = {...state, users: [ ...state.users, ...action.users ]}
-//@ts-ignore
+
           let stateCopy = {...state, users: [...action.users]}
           return stateCopy
         }
 
         case SET_CURRENT_PAGE: {
-//@ts-ignore
+
           return {...state, currentPage: action.currentPage}
         }
 
         case SET_TOTAL_USERS_COUNT: {
-          //@ts-ignore
+          
           return {...state, totalUsersCont: action.totalCount}
         }
         
         case TOGGLE_IS_FETCHING: {
-          //@ts-ignore
+          
           return {...state, isFetching: action.isFetching}
         }
 
@@ -108,11 +110,11 @@ const usersPageReducer = (state: InitialStateType = initialState, action: Action
         case TOGGLE_IS_FOLLOWING_PROGRESS: {
           return {
                 ...state, 
-                //@ts-ignore
+                
                 followingInProgress: action.isFetching
-                //@ts-ignore
+                
                 ? [...state.followingInProgress, action.id]
-                //@ts-ignore
+                
                 : state.followingInProgress.filter(id => id != action.id)
           }
         }
@@ -177,7 +179,7 @@ export const setToggleIsFollowingProgress = (isFetching: boolean, id: number) =>
 // Get Users
 export const getUsers = (currentPage: number, pageSize: number) => {
 
-  return (dispatch: any) => {
+  return (dispatch: Dispatch) => {
   
     dispatch(setToggleIsFetching(true));
               // Server request Getting Users
@@ -192,7 +194,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 
 export const unfollow = (id: number) => {
 
-  return(dispatch: any) => {
+  return(dispatch: Dispatch) => {
 
     dispatch(setToggleIsFollowingProgress(true, id)) // Following in Progress START
               
@@ -208,7 +210,7 @@ export const unfollow = (id: number) => {
 
 export const follow = (id: number) => {
 
-  return(dispatch: any) => {
+  return(dispatch: Dispatch) => {
 
     dispatch(setToggleIsFollowingProgress(true, id)) // Following in Progress START
               

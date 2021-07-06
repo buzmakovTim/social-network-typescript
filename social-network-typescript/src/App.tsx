@@ -7,12 +7,13 @@ import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import News from './Component/News/News';
 import Music from './Component/Music/Music';
 import Settings from './Component/Settings/Settings';
-import { ActionsType, RootStateType, StoreType } from './redux/state';
+// import { ActionsType, RootStateType, StoreType } from './redux/state';
 import NavbarContainer from './Component/Navbar/NavbarContainer';
 
 import { UsersContainer } from './Component/Users/UsersContainer';
 import { ProfileContainer } from './Component/Profile/ProfileContainer';
 import { HeaderContainer } from './Component/Header/HeaderContainer';
+import Login from './Component/Login/Login';
 
 // import { UsersContainer } from './Component/Users/UsersContainer';
 
@@ -56,6 +57,8 @@ const App = () => {
           <Route path="/music" component={Music} />
           <Route path="/settings" component={Settings} />
           
+          {/* Route to Login page */}
+          <Route path="/login" render={() => <Login />} />
 
           {/* Main default page is Profile */}
           <Redirect to="/profile" />
