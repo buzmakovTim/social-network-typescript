@@ -7,21 +7,32 @@ import { AuthorizeType } from './HeaderContainer';
 const Header = (props: AuthorizeType) => {
   return (
     <header className={c.header}>
+      
+      
       <div className={c.inner}>
+        
+        {/* Logo and search */}
         <div className={c.logo}>
           <img src={logo} alt="" />
 
           <div className={c.logoText}>SOCIAL NETWORK</div>
+        
+          <div>
+              <input placeholder="Search"></input>
+         </div>
+  
         </div>
-        <div>
-          <input placeholder="Search"></input>
-        </div>
+        {/* Logo and search end */}
 
+        {/* Login */}
         <div className={c.login}>
-        { props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+          { props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
         </div>
 
       </div>
+
+
+      
     </header>
   );
 };

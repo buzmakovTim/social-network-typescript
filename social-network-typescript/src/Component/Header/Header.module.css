@@ -9,14 +9,16 @@
 .inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 60px;
     width: 70%;
     margin: 0 auto;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(175, 224, 220); */
 }
 
 .logo {
     display: flex;
+    /* align-self: center; */
     align-items: center;
     /* text-align: center; */
     height: 60px;
@@ -53,4 +55,5 @@ input:focus {
 }
 
 .login {
+    padding-right: 20px;
 }
