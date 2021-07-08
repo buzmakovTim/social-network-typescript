@@ -16,9 +16,12 @@ import youtube from '../../../images/youtube.png'
 import { useSelector } from 'react-redux';
 import { AppStateType } from '../../../redux/redux-store';
 import { Redirect } from 'react-router-dom';
+import ProfileStatus from './ProfileStatus';
 
 type ProfileInfoPropsType = {
   profile: ProfileType | null;
+  status: string | null;
+  statusUpdateCallBack: (status: string) => void;
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -41,8 +44,20 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
       
 
       <div className={c.profileHeader}>
-        <img src={props.profile.photos?.large ? props.profile.photos?.large : userIcon} alt="" />
         
+        
+        <div>
+              {/* Image */}
+              <img src={props.profile.photos?.large ? props.profile.photos?.large : userIcon} alt="" />
+            
+              {/* Status */}
+              <div className={c.statusContainer}>
+                <ProfileStatus status={props.status} statusUpdateCallBack={props.statusUpdateCallBack}/>
+              </div>        
+              
+        </div>
+        
+
         <div>
         {/* Name */}
           <h2>{props.profile?.fullName}</h2>

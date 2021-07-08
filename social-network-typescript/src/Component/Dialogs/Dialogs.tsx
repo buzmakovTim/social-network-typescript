@@ -12,14 +12,14 @@ import { AppStateType } from '../../redux/redux-store';
 
 
 
-type DialogsPropsType = {
-  newMessage: string
-  users: UserType[];
-  messages: MessageType[];
-  setUserIdFotMessages: (id: string) => void;
-  sendMessage: () => void;
-  updateMessageText: (messageText: string) => void 
-};
+// type DialogsPropsType = {
+//   newMessage: string
+//   users: UserType[];
+//   messages: MessageType[];
+//   setUserIdFotMessages: (id: string) => void;
+//   sendMessage: () => void;
+//   updateMessageText: (messageText: string) => void 
+// };
 
 const Dialogs = () => {
 

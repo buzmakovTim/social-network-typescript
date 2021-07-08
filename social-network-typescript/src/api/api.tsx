@@ -34,10 +34,8 @@ export const usersAPI = {
 
     getProfile(userId: number){
         //returning promise
-        return instance.get(`profile/${userId}`)
-        .then(response =>{
-            return response.data
-        })
+        console.warn('Deprecated method. Please use profileAPI object instead')
+        return profileAPI.getProfile(userId);
     },
 
 
@@ -57,29 +55,30 @@ export const usersAPI = {
             return response.data;
         });    
     },
-
-
 }
 
 
-// // Follow Unfollow
-// export const followUnfollowAPI = {
+export const profileAPI = {
 
-//     follow(userId: number){
-//         //returning promise
-//         return instance.post(`follow/${userId}`)
-//         .then(response => {
-//             return response.data;
-//         });    
-//     },  
+    getProfile(userId: number) {
+        return instance.get(`profile/${userId}`)
+            .then(response =>{
+                
+                return response.data;
+        })
+    },
 
-//     unfollow(userId: number){
-//         //returning promise
-//         return instance.delete(`follow/${userId}`)
-//         .then(response => {
-//             return response.data;
-//         });    
-//     },
-// }
+    getStatus(userId: number) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => {
 
+                return response.data;
+            })
+    },
+
+    updateStatus(status: string){
+        return instance.put(`profile/status`, {status: status});
+    }
+
+}
 

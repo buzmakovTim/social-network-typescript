@@ -11,9 +11,12 @@ import Settings from './Component/Settings/Settings';
 import NavbarContainer from './Component/Navbar/NavbarContainer';
 
 import { UsersContainer } from './Component/Users/UsersContainer';
-import { ProfileContainer } from './Component/Profile/ProfileContainer';
+// import { ProfileContainer } from './Component/Profile/ProfileContainer';
 import { HeaderContainer } from './Component/Header/HeaderContainer';
 import Login from './Component/Login/Login';
+import withAuthRedirect from './hoc/withAuthRedirect';
+import ProfileContainer from './Component/Profile/ProfileContainer';
+// import ProfileContainer from './Component/Profile/ProfileContainer';
 
 // import { UsersContainer } from './Component/Users/UsersContainer';
 
@@ -33,6 +36,9 @@ import Login from './Component/Login/Login';
 const App = () => {
 
   //const state = props.store.getState()
+
+  
+  
   return (
     <div>
       <HeaderContainer />
@@ -44,11 +50,15 @@ const App = () => {
       <div className={c.appWrapperContent}>
 
           {/* Dialogs */}
-          <Route path="/dialogs" render={() => <Dialogs />} />
+
+          
+          {/* @ts-ignore */}
+          <Route path="/dialogs" render={() => <Dialogs/> } />
           {/* <Route path="/dialogs" render={() => <DialogsContainer store={props.store}/>} /> */}
 
           {/* Profile */}
           {/* /profile/:userId?   :userId?  it's for withRouter */}
+          {/* @ts-ignore */}
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
 
           {/* Find Users */}
