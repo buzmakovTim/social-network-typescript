@@ -1,69 +1,76 @@
 import React, { ChangeEvent, TextareaHTMLAttributes, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Field, reduxForm, submit } from 'redux-form';
 import { v1 } from 'uuid';
-import { addPostAC, changeNewTextActionTypeAC } from '../../../redux/profilePage-reducer';
+import { addPostAC, PostType } from '../../../redux/profilePage-reducer';
 import { AppStateType } from '../../../redux/redux-store';
+import c from './MyPosts.module.css';
+import Post from './Post/Post';
+import { PostPropsType } from './Post/Post';
 
-// import MyPosts from './MyPosts';
-// import c from './MyPosts.module.css';
-// import Post from './Post/Post';
-// import { PostPropsType } from './Post/Post';
-// import {connect} from 'react-redux';
-
-
-// type MyPostsContainerPropsType = {
-//   store: StoreType;
+// type MyPostsPropsType = {
+//   posts: Array<PostPropsType>;
+//   newPostText: string;
+//   addPost: () => void;
+//   //updateNewPostText: (newText: string) => void;
 // };
 
-// // MyPosts Container component
-// // Taking the store
-
-const MyPostsContainer = () => {
-
-//   // Add Post call back Handler
-//   let addPostHandler = () => {
-//     store.dispatch(addPostAC())
-//   };
-
-//   // Update New Post Text call back Handler
-//   let updateNewPostTextHandler = (newText: string) => {
-//     let action = changeNewTextActionTypeAC(newText) // creating action with action creator
-//     store.dispatch(action)
-//   }
-
-
-return (
-  <div>
+const MyPostsContainer: React.FC<any> = (props: any) => {
+  
+  const posts = useSelector<AppStateType, Array<PostType>> (state => state.profilePage.posts)
+  const dispatch = useDispatch()
+  //
+  //Creating array for Posts using MAP
+  
+  
+  let _posts = posts.map((post: PostType) => (
     
-  </div>
-)
+    <Post key={post.id} postText={post.message} likes={post.likes} />
+ 
+  ));
 
-//   return (
-//       // Pure Component MyPosts
-//       // Nothing know about the store
-//       <MyPosts newPostText={store.getState().profilePage.newPostText} 
-//                posts={store.getState().profilePage.posts} 
-//                addPost={addPostHandler} 
-//                updateNewPostText={updateNewPostTextHandler}/>
-//       )
+
+  let addPostFunction = (postText: any) => {
+      // alert(postText.newPostText);
+      dispatch(addPostAC(postText.newPostText));
+  };
+
+  // let onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  //   updateNewPostText(e.currentTarget.value)
+  // }
+
+  return (
+    <div>
+      <h3>My Posts</h3>
+      
+      {/* Post text area */}
+      <div>
+        <NewPostReduxForm onSubmit={addPostFunction}/>
+      </div>
+
+      
+
+      {/* All post to display */}
+      <div>{_posts}</div>
+
+    </div>
+  );
+};
+
+
+const NewPostForm = (props: any) => {
+
+  return (
+      <form onSubmit={props.handleSubmit}>
+        <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your message'}/>
+        
+        <div>
+          <button>Add post</button>
+        </div>
+      </form>
+  )
 }
 
-let mapsStateToProps = (state: AppStateType) => {
-    return {
-      newPostText: null,
-      posts: null
-    }
-}
+const NewPostReduxForm = reduxForm({form: 'postForm'})(NewPostForm)
 
-let mapsDispatchToProps = (dispatch: any) => {
-  return {
-    addPost: () => {
-      dispatch(addPostAC())
-    },
-    updateNewPostText: (newText: string) => {
-      dispatch(changeNewTextActionTypeAC(newText))
-    }
-  }
-}
-
-// const MyPostsContainer = connect(mapsStateToProps, mapsDispatchToProps)(MyPosts);
 export default MyPostsContainer;

@@ -6,7 +6,7 @@ import { ActionsType } from '../types/types';
 import { PhotosType } from './usersPage-reducer';
 import { Dispatch } from 'redux'; 
 const ADD_POST = 'ADD-POST';
-const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
+// const CHANGE_NEW_POST_TEXT = 'CHANGE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -24,6 +24,7 @@ export type ContactsType = {
 export type InitialStateType = {
   profile: ProfileType | null;
   status: string | null;
+  posts: Array<PostType>;
 }
 
 export type ProfileType = {
@@ -36,10 +37,17 @@ export type ProfileType = {
   photos: PhotosType | null;
 }
 
+export type PostType = {
+  id: string;
+  message: string;
+  likes: number;
+}
+
 // Initial state for Dialog Page
 let initialState: InitialStateType = {
     profile: null,
-    status: ""
+    status: "",
+    posts: [],
     }
 
 // state: DialogsPageType = initialState 
@@ -66,6 +74,20 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
           }
         }
 
+        case ADD_POST: {
+          
+          let newPost:PostType = {
+            id: v1(),
+            message: action.newPostText,
+            likes: 0
+          }
+          
+          return {
+            ...state,
+            posts: [...state.posts, newPost]
+          }
+        }
+
         default: 
               return state
     }
@@ -74,17 +96,18 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
 //
 // Action Creators Start
 //
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
     return { 
-      type: ADD_POST
+      type: ADD_POST,
+      newPostText
     } as const
   }
-  export const changeNewTextActionTypeAC = (newText: string) => {
-    return {
-      type: CHANGE_NEW_POST_TEXT,
-      newText
-    } as const
-  }
+  // export const changeNewTextActionTypeAC = (newText: string) => {
+  //   return {
+  //     type: CHANGE_NEW_POST_TEXT,
+  //     newText
+  //   } as const
+  // }
   export const setUserProfileAC = (profile: ProfileType) => {
     return {
       type: SET_USER_PROFILE,
@@ -117,11 +140,8 @@ export const getStatus = (userId: number) => (dispatch: Dispatch) => {
 
 export const updateStatus = (status: string) => (dispatch: Dispatch) => {
     
-    
     profileAPI.updateStatus(status).then( response => {
-
       // if no error we gonna update State
-      
         if(response.data.resultCode === 0){
           dispatch(setStatus(status));
           //debugger

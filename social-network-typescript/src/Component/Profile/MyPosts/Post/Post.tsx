@@ -3,7 +3,7 @@ import { UserType } from '../../../../types/types';
 import c from './Post.module.css';
 
 export type PostPropsType = {
-  user: UserType;
+  //user: UserType;
   postText: string;
   likes: number;
 };
@@ -20,7 +20,7 @@ const Post = (props: PostPropsType) => {
         <div>
           <div className={c.userName}>
             <span>
-              {props.user.firstName} {props.user.lastName}
+              {/* {props.user.firstName} {props.user.lastName} */}
             </span>
           </div>
           <div>

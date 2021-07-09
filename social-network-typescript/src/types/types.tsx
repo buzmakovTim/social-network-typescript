@@ -1,6 +1,6 @@
 import { setUserData } from "../redux/auth-reducer";
 import { sendMessageActionTypeAC, setUserIdForMessageAC } from "../redux/dialogsPage-reducer";
-import { addPostAC, changeNewTextActionTypeAC, setStatus, setUserProfileAC } from "../redux/profilePage-reducer";
+import { addPostAC, setStatus, setUserProfileAC } from "../redux/profilePage-reducer";
 import { follow, followSuccess, getUsers, setCurrentPage, setToggleIsFetching, setToggleIsFollowingProgress, setTotalUsersCount, setUsers, unfollow, unfollowSuccess } from "../redux/usersPage-reducer";
 
 
@@ -23,21 +23,12 @@ export type DialogsPageType = {
   userId: string
 };
 
-export type ActionsType =   ReturnType<typeof changeNewTextActionTypeAC> | 
-                            ReturnType<typeof addPostAC> |
+export type ActionsType =   ReturnType<typeof addPostAC> |
                             ReturnType<typeof setUserProfileAC> |
                             ReturnType<typeof sendMessageActionTypeAC> |
                             ReturnType<typeof setUserIdForMessageAC> |
-                            //ReturnType<typeof getUsers> |
-                            //ReturnType<typeof follow> |
-                            //ReturnType<typeof unfollow> |
                             ReturnType<typeof followSuccess> |
                             ReturnType<typeof unfollowSuccess> |
-                            // ReturnType<typeof setUsers> |
-                            // ReturnType<typeof setUsers> |
-                            // ReturnType<typeof setUsers> |
-
-
                             ReturnType<typeof setUsers> |
                             ReturnType<typeof setCurrentPage> |
                             ReturnType<typeof setTotalUsersCount> |
