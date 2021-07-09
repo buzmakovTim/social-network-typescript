@@ -3,6 +3,8 @@ import { authAPI, usersAPI } from '../api/api';
 // import { ActionsType } from './state';
 import {Dispatch} from 'redux';
 import { ActionsType } from '../types/types';
+import { reduxForm } from 'redux-form';
+import { Redirect } from 'react-router-dom';
 // import { ActionsType } from './redux-store';
 
 const SET_USER_DATA = 'SET_USER_DATA'
@@ -35,8 +37,8 @@ const authReducer = (state: InitialStateType = initialState, action: ActionsType
         return {
             ...state,
             
-            ...action.data,
-            isAuth: true
+            ...action.payload
+            //isAuth: action.payload.isAuth
           
         }
           
@@ -48,13 +50,14 @@ const authReducer = (state: InitialStateType = initialState, action: ActionsType
 //
 // Action Creators Start
 //
-export const setUserData = (id: number, login: string, email: string) => {
+export const setUserData = (id: number, login: string, email: string, isAuth: boolean) => {
     return {
       type: SET_USER_DATA,
-      data: {
+      payload: {
           id,
           login,
           email,
+          isAuth
       }
     } as const;
   }
@@ -69,7 +72,26 @@ export const getAuthUserData = () => (dispatch: Dispatch) =>
         .then(data => {
           if(data.resultCode === 0) {
             let {id, login, email} = data.data;
-            dispatch(setUserData(id, login, email))
+            dispatch(setUserData(id, login, email, true))
+          }
+        })
+
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => 
+    authAPI.login(email, password, rememberMe)
+        .then(data => {
+          if(data.resultCode === 0) {
+            //@ts-ignore
+            dispatch(getAuthUserData())
+          }
+        })
+
+export const logout = () => (dispatch: Dispatch) => 
+    authAPI.logout()
+        .then(data => {
+          if(data.resultCode === 0) {
+            //@ts-ignore
+            dispatch(setUserData(null, null, null, false))
+
           }
         })
 //

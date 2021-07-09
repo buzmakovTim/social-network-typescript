@@ -9,6 +9,8 @@ import { sendMessageActionTypeAC } from '../../redux/dialogsPage-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
 import {Field, reduxForm} from 'redux-form';
+import { maxLengthCreator, required } from '../Common/Validator/validators';
+import { TextArea } from '../Common/FormsControl/FormsControl';
 
 
 // type DialogsPropsType = {
@@ -71,15 +73,21 @@ const Dialogs = () => {
 };
 
 
-
+const maxLength = maxLengthCreator(50);
 // Send Message form
 const AddMessageForm = (props: any) => {
+  
   
   return (
     <form onSubmit={props.handleSubmit}>
 
         <div>
-          <Field  component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
+          <Field  component={TextArea} 
+                  name={'newMessageBody'} 
+                  placeholder={'Enter your message'}
+                  validate={[required, maxLength]}
+                  />
+                  
         </div>
         <div>
           <button>Send</button>

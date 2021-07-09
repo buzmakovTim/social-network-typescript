@@ -6,7 +6,10 @@ import { addPostAC, PostType } from '../../../redux/profilePage-reducer';
 import { AppStateType } from '../../../redux/redux-store';
 import c from './MyPosts.module.css';
 import Post from './Post/Post';
-import { PostPropsType } from './Post/Post';
+import style from './MyPostsContainer.module.css'
+import { maxLengthCreator, required } from '../../Common/Validator/validators';
+import { TextArea } from '../../Common/FormsControl/FormsControl';
+
 
 // type MyPostsPropsType = {
 //   posts: Array<PostPropsType>;
@@ -58,16 +61,25 @@ const MyPostsContainer: React.FC<any> = (props: any) => {
 };
 
 
+const maxLength = maxLengthCreator(10);
 const NewPostForm = (props: any) => {
 
   return (
-      <form onSubmit={props.handleSubmit}>
-        <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your message'}/>
-        
-        <div>
-          <button>Add post</button>
-        </div>
-      </form>
+      <div>
+             <form onSubmit={props.handleSubmit}>
+              <Field component={TextArea} 
+                     name={'newPostText'} 
+                     placeholder={'Enter your message'}
+                     validate={[required, maxLength]}
+              />
+              
+              <div className={style.submitButton}>
+                <button>Add post</button>
+              </div>
+
+            </form>
+      </div>
+      
   )
 }
 

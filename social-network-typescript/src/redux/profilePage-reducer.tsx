@@ -59,7 +59,6 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
     
     switch(action.type){
 
-        
         case SET_USER_PROFILE: {
           return {
             ...state, 
@@ -75,7 +74,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
         }
 
         case ADD_POST: {
-          
+
           let newPost:PostType = {
             id: v1(),
             message: action.newPostText,
@@ -84,7 +83,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
           
           return {
             ...state,
-            posts: [...state.posts, newPost]
+            posts: [newPost, ...state.posts]
           }
         }
 
