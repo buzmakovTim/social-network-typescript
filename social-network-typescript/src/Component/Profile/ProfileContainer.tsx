@@ -24,49 +24,34 @@ class ProfileContainer extends React.Component<PropsType> {
   componentDidMount() {
  
 
-    // UserId we are getting from withRouter  Type PathParamsType 
-    let userId = Number(this.props.match.params.userId);
+      // UserId we are getting from withRouter  Type PathParamsType 
+      let userId = Number(this.props.match.params.userId);
 
-    if(!userId) {
-      // If I'm authorized, show my profile, otherwise PRELOADER gonna run none stop!!! NEEDS TO BE FIXED!
-      authAPI.me().then(data => {
-          this.props.getUserProfile(data.data.id)
-          this.props.getStatus(data.data.id)
-          })    
-    } else {
-        //Show profile that we clicked on
-        this.props.getUserProfile(userId)
-        this.props.getStatus(userId)
-        
-    }
-    
+      if(!userId) {
+        // If I'm authorized, show my profile, otherwise PRELOADER gonna run none stop!!! NEEDS TO BE FIXED!
+        authAPI.me().then(data => {
+            this.props.getUserProfile(data.data.id)
+            this.props.getStatus(data.data.id)
+            })    
+      } else {
+          //Show profile that we clicked on
+          this.props.getUserProfile(userId)
+          this.props.getStatus(userId)
+          
+      }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps: PropsType, prevStatus: AppStateType) {
 
     console.log('Did update called!!!!');
     
-    // authAPI.me().then(data => {
-    //   this.props.getUserProfile(data.data.id)
-    //   this.props.getStatus(data.data.id)
-    //   })
-    // // UserId we are getting from withRouter  Type PathParamsType 
-    // let userId = Number(this.props.match.params.userId);
-    
-    // // By default we gonna show profile who is login
-    // if(!userId) {
-    //   // If I'm authorized, show my profile, otherwise PRELOADER gonna run none stop!!! NEEDS TO BE FIXED!
-    //   authAPI.me().then(data => {
-    //       this.props.getUserProfile(data.data.id)
-
-    //       })    
-    // } else {
-    //     //Show profile that we clicked on
+    if(prevProps.match.params.userId !== this.props.match.params.userId) {
         
-        
-    //     this.props.getUserProfile(userId)
-    //     this.props.getStatus(userId)
-    // }
+      authAPI.me().then(data => {
+        this.props.getUserProfile(data.data.id)
+        this.props.getStatus(data.data.id)
+        })  
+    }
   }
 
   // Render

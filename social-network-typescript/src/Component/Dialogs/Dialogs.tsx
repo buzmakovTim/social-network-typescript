@@ -1,15 +1,14 @@
 import React, { useState, useRef, ChangeEvent } from 'react';
 import c from './Dialogs.module.css';
-import { BrowserRouter, NavLink, Route } from 'react-router-dom';
-import { isPropertyAssignment, ListFormat } from 'typescript';
-import DialogItem, { DialogItemPropsType } from './DialogItem/DialogItem';
-import Message, { MessagePropsType } from './Message/Message';
-import { MessageType, UserType } from '../../types/types';
+
+import DialogItem from './DialogItem/DialogItem';
+import Message from './Message/Message';
+import { UserType } from '../../types/types';
 import { v1 } from 'uuid';
-import { sendMessageActionTypeAC, updateNewMessageTextActionTypeAC } from '../../redux/dialogsPage-reducer';
+import { sendMessageActionTypeAC } from '../../redux/dialogsPage-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../redux/redux-store';
-
+import {Field, reduxForm} from 'redux-form';
 
 
 // type DialogsPropsType = {
@@ -25,7 +24,7 @@ const Dialogs = () => {
 
   const dispatch = useDispatch();
   
-  let messageValue =  useSelector<AppStateType, string>(state => state.dialogsPage.newMessageText) 
+  //let messageValue =  useSelector<AppStateType, string>(state => state.dialogsPage.newMessageText) 
   let userId: string = useSelector<AppStateType, string>(state => state.dialogsPage.userId) 
   //userId = useSelector<AppStateType, string>(state => state.dialogsPage.users[0].id)
   const dialogs = useSelector<AppStateType, Array<UserType>>(state => state.dialogsPage.users) 
@@ -47,16 +46,11 @@ const Dialogs = () => {
   ));
 
 
-  // Update Text Message Handler
-  let textAreaOnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //props.updateMessageText(e.currentTarget.value)
-    dispatch(updateNewMessageTextActionTypeAC(e.currentTarget.value)) 
+  // Add new message call back
+  const addNewMessage = (messageValue: any) => {
+      //alert(messageValue.newMessageBody);
+      dispatch(sendMessageActionTypeAC(userId, messageValue.newMessageBody))
   }
-
-  //Send Message Handler
-  const sendMessageHandler = () => {
-    dispatch(sendMessageActionTypeAC(userId))
-  };
 
   return (
     <div className={c.dialogs}>
@@ -66,19 +60,36 @@ const Dialogs = () => {
         {/* Messages */}
         <div className={c.messages}>{messagesComponent}</div>
         <div className={c.sendMessage}>
-          <textarea onChange={e => textAreaOnChangeHandler(e)} 
-                    value={messageValue} 
-                    placeholder={'Enter your message'}
-                    className={c.textArea}></textarea>
-          <div>
-            <button onClick={sendMessageHandler} className={c.sendButton}>
-              Send
-            </button>
-          </div>
+
+          {/* Send Message Form */}
+          <AddMessageFormRedux onSubmit={addNewMessage}/>
+    
         </div>
       </div>
     </div>
   );
 };
+
+
+
+// Send Message form
+const AddMessageForm = (props: any) => {
+  
+  return (
+    <form onSubmit={props.handleSubmit}>
+
+        <div>
+          <Field  component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message'}/>
+        </div>
+        <div>
+          <button>Send</button>
+        </div>
+
+    </form>
+  )
+}
+
+const AddMessageFormRedux = reduxForm ({form: 'addMessage'})(AddMessageForm)
+
 
 export default Dialogs;

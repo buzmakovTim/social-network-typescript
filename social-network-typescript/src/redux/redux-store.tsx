@@ -3,10 +3,10 @@ import {applyMiddleware, combineReducers, createStore} from 'redux';
 import dialogPageReducer from './dialogsPage-reducer';
 import friendsPageSideBarReducer from './friendsPageSideBar-reducer';
 import profilePageReducer from './profilePage-reducer';
-// import { StoreType } from './state';
 import thunkMiddleware from 'redux-thunk'
 import usersPageReducer from './usersPage-reducer';
 import authReducer from './auth-reducer';
+import { reducer as formReducer } from 'redux-form' 
 
 
 export const rootReducer = combineReducers({
@@ -15,6 +15,7 @@ export const rootReducer = combineReducers({
     friendsPageSideBar: friendsPageSideBarReducer,
     usersPage: usersPageReducer,
     authorizing: authReducer,
+    form: formReducer
 }) 
 
 

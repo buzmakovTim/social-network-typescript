@@ -62,31 +62,27 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
     
     switch(action.type){
 
-        case UPDATE_NEW_MESSAGE_TEXT: {
-          
-          const stateCopy = {...state}
-    
-          stateCopy.newMessageText = action.newText
-          return stateCopy
-        }
+        
             
 
         case SEND_MESSAGE: {
           
-    
-          const messageToSend = state.newMessageText
-    
+          const stateCopy = {...state, users: [...state.users]}
+
+          const messageToSend = action.newMessage
+          
           const userIdSendTo = action.sendToUserId
           
-          let user = state.users.find( u => u.id === userIdSendTo)
+          let user = stateCopy.users.find( u => u.id === userIdSendTo)
           if(user) {
             user.messages?.push({id: v1(), messageText: messageToSend})
           } else {
           console.log("User ID not found")
           }
           // Add new Message to dialog for particular user.
-          state.newMessageText = ''
-          return state
+          stateCopy.newMessageText = ''
+          
+          return stateCopy
 
         }
             
@@ -108,16 +104,13 @@ const dialogPageReducer = (state: DialogsPageType = initialState, action: Action
 //
 // Action Creators Start
 //
-export const updateNewMessageTextActionTypeAC = (newText: string) => {
-    return {
-      type: UPDATE_NEW_MESSAGE_TEXT,
-      newText: newText
-    } as const
-  }
-  export const sendMessageActionTypeAC = (sendToUserId : string) => {
+
+  export const sendMessageActionTypeAC = (sendToUserId : string, newMessage: string) => {
+    
     return {
       type: SEND_MESSAGE,
-      sendToUserId: sendToUserId
+      sendToUserId: sendToUserId,
+      newMessage: newMessage
     } as const
   }
   export const setUserIdForMessageAC = (userId : string) => {

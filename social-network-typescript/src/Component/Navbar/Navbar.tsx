@@ -23,7 +23,7 @@ const Navbar = (props: NavBarPropsType) => {
   return (
     <nav className={c.nav}>
       <div className={c.item}>
-        <NavLink to="/profile" activeClassName={c.activeLink}>
+        <NavLink exact to="/profile" activeClassName={c.activeLink}>
           Profile
         </NavLink>
       </div>
