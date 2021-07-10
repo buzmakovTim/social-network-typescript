@@ -6,13 +6,19 @@ import { login } from '../../redux/auth-reducer';
 import { AppStateType } from '../../redux/redux-store';
 import { Input } from '../Common/FormsControl/FormsControl';
 import { required } from '../Common/Validator/validators';
-
+import style from './Login.module.css';
 
 const LoginForm = (props: any) => {
 
-    
+    const isAuth = useSelector<AppStateType, boolean>( state => state.authorizing.isAuth)
+    // {isAuth && <Redirect to="/profile" />}
+
     return <div>
         
+        {/* Redirect to Profile page as soon as login */}
+        {isAuth && <Redirect to="/profile" />}  
+        {/*  */}
+
         <form onSubmit={props.handleSubmit}>
            <div>
                 <Field  placeholder={"Email"} 
@@ -32,6 +38,9 @@ const LoginForm = (props: any) => {
                        name={'rememberMe'} 
                        type={'checkbox'}/> remember me
             </div>
+            <div className={style.formSummaryError}>
+                {props.error}
+            </div>
             <div>
                 <button>Login</button>
             </div>
@@ -47,7 +56,7 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const Login = (props: any) => {
     
-    const isAuth = useSelector<AppStateType, boolean>( state => state.authorizing.isAuth)
+    //const isAuth = useSelector<AppStateType, boolean>( state => state.authorizing.isAuth)
     const dispatch = useDispatch()
 
     // Call back passing to ReduxForm 
@@ -55,10 +64,6 @@ const Login = (props: any) => {
         // Here we need to send data to the server
         //console.log(formData.email, formData.password, formData.rememberMe);
         dispatch(login(formData.email, formData.password, formData.rememberMe))
-    }
-
-    if(isAuth) {
-        return <Redirect to={'/profile'}/>
     }
 
     return <div>

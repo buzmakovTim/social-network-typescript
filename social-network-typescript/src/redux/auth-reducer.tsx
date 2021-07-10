@@ -3,7 +3,7 @@ import { authAPI, usersAPI } from '../api/api';
 // import { ActionsType } from './state';
 import {Dispatch} from 'redux';
 import { ActionsType } from '../types/types';
-import { reduxForm } from 'redux-form';
+import { stopSubmit } from 'redux-form';
 import { Redirect } from 'react-router-dom';
 // import { ActionsType } from './redux-store';
 
@@ -34,6 +34,7 @@ const authReducer = (state: InitialStateType = initialState, action: ActionsType
         
       
         case SET_USER_DATA:     
+       
         return {
             ...state,
             
@@ -67,21 +68,33 @@ export const setUserData = (id: number, login: string, email: string, isAuth: bo
 //
 // Thunks
 //
-export const getAuthUserData = () => (dispatch: Dispatch) => 
-    authAPI.me()
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+  
+  //returning for app-reduced to use it as a promise
+  return authAPI.me()
         .then(data => {
           if(data.resultCode === 0) {
             let {id, login, email} = data.data;
             dispatch(setUserData(id, login, email, true))
           }
         })
-
+}
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => 
     authAPI.login(email, password, rememberMe)
         .then(data => {
           if(data.resultCode === 0) {
-            //@ts-ignore
-            dispatch(getAuthUserData())
+              //@ts-ignore
+              dispatch(getAuthUserData());
+              
+          } else {
+
+              // If server return error we will do this and show error for user. 
+
+              // let action = stopSubmit('login', {email: 'Email is wrong'})    Email form will be showed as error
+              // dispatch(action);
+              let errorMessage = data.messages.length > 0 ? data.messages[0] : 'Some error';
+              dispatch(stopSubmit('login', {_error : errorMessage}))
+
           }
         })
 

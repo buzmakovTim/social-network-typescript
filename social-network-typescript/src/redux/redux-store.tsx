@@ -7,6 +7,7 @@ import thunkMiddleware from 'redux-thunk'
 import usersPageReducer from './usersPage-reducer';
 import authReducer from './auth-reducer';
 import { reducer as formReducer } from 'redux-form' 
+import appReducer from './app-reducer';
 
 
 export const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ export const rootReducer = combineReducers({
     friendsPageSideBar: friendsPageSideBarReducer,
     usersPage: usersPageReducer,
     authorizing: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 }) 
 
 

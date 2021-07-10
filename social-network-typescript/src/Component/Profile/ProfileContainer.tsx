@@ -82,36 +82,21 @@ type MapStatePropsType = {
   updateStatus: (status: string) => void
  }
 
-let mapsStateProps = (state: AppStateType): MapStatePropsType => {
+let mapStateProps = (state: AppStateType): MapStatePropsType => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status
   }
 }
-// let mapsDispatchProps = (dispatch: Dispatch): MapDispatchPropsType => {
-//   return {
-//     setUserProfile: (profile: ProfileType) => {
-//       dispatch(setUserProfileAC(profile))
-//     }
-//   }
-// }
+
+
 type ProfileInfoType = MapStatePropsType & MapDispatchPropsType
 
 type PropsType = RouteComponentProps<PathParamsType> & ProfileInfoType
-// const Profile = () => {
-//   return (
-//     <div>
-      
-//       <MyPostsContainer />
-//     </div>
-//   );
-// };
 
-
-//let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 let  withUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default  connect(mapsStateProps, 
+export default  connect(mapStateProps, 
                                             {getUserProfile, getStatus, updateStatus} // thunk
                                             )(withUrlDataContainerComponent)

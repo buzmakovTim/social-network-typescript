@@ -1,3 +1,4 @@
+import { initializeSuccess } from "../redux/app-reducer";
 import { setUserData } from "../redux/auth-reducer";
 import { sendMessageActionTypeAC, setUserIdForMessageAC } from "../redux/dialogsPage-reducer";
 import { addPostAC, setStatus, setUserProfileAC } from "../redux/profilePage-reducer";
@@ -36,4 +37,5 @@ export type ActionsType =   ReturnType<typeof addPostAC> |
                             ReturnType<typeof setUserProfileAC> |
                             ReturnType<typeof setUserData> |
                             ReturnType<typeof setToggleIsFollowingProgress> |
-                            ReturnType<typeof setStatus>
+                            ReturnType<typeof setStatus> |
+                            ReturnType<typeof initializeSuccess> 
