@@ -25,6 +25,7 @@ class App extends React.Component<AppPropsType> {
     this.props.initializeApp();
   
   }
+  // I need to test if this working or not...
 
 
   render() {
