@@ -2,7 +2,7 @@ import { initializeSuccess } from "../redux/app-reducer";
 import { setUserData } from "../redux/auth-reducer";
 import { sendMessageActionTypeAC, setUserIdForMessageAC } from "../redux/dialogsPage-reducer";
 import { addPostAC, setStatus, setUserProfileAC } from "../redux/profilePage-reducer";
-import { follow, followSuccess, getUsers, setCurrentPage, setToggleIsFetching, setToggleIsFollowingProgress, setTotalUsersCount, setUsers, unfollow, unfollowSuccess } from "../redux/usersPage-reducer";
+import {followSuccess, setCurrentPage, setToggleIsFetching, setToggleIsFollowingProgress, setTotalUsersCount, setUsers, unfollowSuccess } from "../redux/usersPage-reducer";
 
 
 export type MessageType = {

@@ -1,14 +1,15 @@
 import React from 'react';
 import { AppStateType } from '../../redux/redux-store';
-import { UserType, follow, unfollow, setCurrentPage, setToggleIsFollowingProgress, getUsers } from '../../redux/usersPage-reducer';
+import { UserType, follow, unfollow, setCurrentPage, setToggleIsFollowingProgress, requestUsers } from '../../redux/usersPage-reducer';
 import Users from './Users';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux'
-import { decodedTextSpanIntersectsWith, idText } from 'typescript';
+// import { decodedTextSpanIntersectsWith, idText } from 'typescript';
 import axios from 'axios';
 import { Preloader } from '../Common/Preloader/Preloader';
 import style from './UsersContainer.module.css'
-import { usersAPI } from '../../api/api';
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCont, getUsers } from './users-selectors';
+// import { usersAPI } from '../../api/api';
 
 
 
@@ -19,7 +20,7 @@ class UsersContainerComponent extends React.Component<UsersPropsType> {
 
         // Getting users using thunk! 
         //@ts-ignore
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
 
         // if(this.props.users.length === 0) {
 
@@ -56,7 +57,7 @@ class UsersContainerComponent extends React.Component<UsersPropsType> {
             
             // Server request Getting Users
             //@ts-ignore
-            this.props.getUsers(pageToSet, this.props.pageSize)
+            this.props.requestUsers(pageToSet, this.props.pageSize)
             
             
             // usersAPI.getUsers(pageToSet, this.props.pageSize).then(data => {
@@ -174,12 +175,13 @@ type MapDispatchPropsType = {
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCont: state.usersPage.totalUsersCont,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        //users: state.usersPage.users,                     // old way
+        users: getUsers(state),                             // using selector  from users-selectors.tsx
+        pageSize: getPageSize(state),                       // using selector  from users-selectors.tsx
+        totalUsersCont: getTotalUsersCont(state),           // using selector  from users-selectors.tsx   
+        currentPage: getCurrentPage(state),                 // using selector  from users-selectors.tsx   
+        isFetching: getIsFetching(state),                   // using selector  from users-selectors.tsx   
+        followingInProgress: getFollowingInProgress(state) // using selector  from users-selectors.tsx   
     }
 };
 
@@ -220,6 +222,6 @@ export const UsersContainer = connect (mapStateToProps, {
     //setTotalUsersCount,
     //setToggleIsFetching,
     setToggleIsFollowingProgress,
-    getUsers, // Thunk
+    requestUsers, // Thunk
 }
     )(UsersContainerComponent)

@@ -31,7 +31,7 @@ class App extends React.Component<AppPropsType> {
   render() {
 
       if(!this.props.initialized) {
-        alert('Initializing')
+        // alert('Initializing')
         return <Preloader />
       }
 

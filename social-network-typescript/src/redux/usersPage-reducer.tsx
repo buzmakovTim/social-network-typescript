@@ -177,7 +177,7 @@ export const setToggleIsFollowingProgress = (isFetching: boolean, id: number) =>
 
 // Thunks Start...
 // Get Users
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (currentPage: number, pageSize: number) => {
 
   return (dispatch: Dispatch) => {
   
